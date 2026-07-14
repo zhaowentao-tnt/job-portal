@@ -1,0 +1,41 @@
+:root {
+  /* === 配色 === */
+  --bg: #f6f7fa;
+  --card-bg: #ffffff;
+  --primary: #4361ee;
+  --primary-light: #eef1fd;
+  --primary-dark: #3451d1;
+  --accent: #06d6a0;
+  --accent-light: #e6faf3;
+  --text: #1a1a2e;
+  --text-sub: #4a4a68;
+  --text-light: #8e8ea8;
+  --text-muted: #b0b0c0;
+  --border: #e8ecf1;
+  --border-light: #f0f2f5;
+  --success: #10b981;
+  --success-light: #ecfdf5;
+  --warning: #f59e0b;
+  --warning-light: #fffbeb;
+  --danger: #ef4444;
+  --danger-light: #fef2f2;
+  --tag-bg: #f0f2f8;
+
+  /* === 间距 === */
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 8px 28px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.04);
+
+  /* === 字体 === */
+  --font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+
+  /* === 尺寸 === */
+  --nav-height: 64px;
+  --max-width: 1100px;
+  --content-width: 800px;
+}
