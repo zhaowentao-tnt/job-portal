@@ -1,7 +1,8 @@
 {
-  "lastUpdated": "2026-07-04",
+  "lastUpdated": "2026-07-16",
   "statusConfig": {
     "submitted": { "label": "已投递", "color": "#4361ee" },
+    "processing": { "label": "处理中", "color": "#0ea5e9" },
     "written_test": { "label": "笔试", "color": "#8b5cf6" },
     "interview_1": { "label": "面试中", "color": "#f59e0b" },
     "interview_2": { "label": "二面", "color": "#f97316" },
@@ -411,6 +412,70 @@
       ],
       "links": {},
       "note": "第五梯队·基本放弃：官网已结束"
+    },
+    {
+      "id": "app_025",
+      "company": "格力",
+      "position": "2026年大学生创新实践营",
+      "department": "",
+      "location": "珠海市",
+      "channel": "官网",
+      "applyDate": "2026-07-04 21:30:40",
+      "currentStatus": "processing",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "processing", "date": "2026-07-04", "note": "申请于 2026-07-04 21:30:40，处理中（已申请），职位编号 G001khqo" }
+      ],
+      "links": { "job": "https://zhaopin.greeyun.com/mine" },
+      "note": "珠海市 · 职位编号 G001khqo · 处理中（已申请）。官网投递进度：https://zhaopin.greeyun.com/mine"
+    },
+    {
+      "id": "app_026",
+      "company": "理想汽车",
+      "position": "营销数据策略实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-07-07",
+      "currentStatus": "processing",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "processing", "date": "2026-07-07", "note": "投递于 2026-07-07，还在进程中" }
+      ],
+      "links": { "job": "https://www.lixiang.com/employ/archives.html?fromJob=1" },
+      "note": "投递于 2026-07-07，还在进程中。招聘页：https://www.lixiang.com/employ/archives.html?fromJob=1"
+    },
+    {
+      "id": "app_027",
+      "company": "欧莱雅（中国）",
+      "position": "科技青年咖项目",
+      "department": "",
+      "location": "",
+      "channel": "官网/第三方",
+      "applyDate": "",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-07", "note": "已提交申请" }
+      ],
+      "links": { "job": "https://pc-agent-aiview.hrtps.com/?sid=U2FsdGVkX18SVUvCUl47JkNdjlZKZ4iPADT2YMOH0Gt9tJS46WVA5pMKrpeu%2BQKP#/app/complete/index" },
+      "note": "已提交申请。申请页：https://pc-agent-aiview.hrtps.com/?sid=U2FsdGVkX18SVUvCUl47JkNdjlZKZ4iPADT2YMOH0Gt9tJS46WVA5pMKrpeu%2BQKP#/app/complete/index"
+    },
+    {
+      "id": "app_028",
+      "company": "京东",
+      "position": "2027 TET 管理培训生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-07", "note": "已投递" }
+      ],
+      "links": { "job": "https://campus.jd.com/#/myDeliver?type=present" },
+      "note": "已投递。我的投递页：https://campus.jd.com/#/myDeliver?type=present"
     }
   ]
 }

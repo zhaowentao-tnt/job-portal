@@ -87,7 +87,7 @@ const stats = computed(() => {
   const all = apps.value
   return {
     total: all.length,
-    inProgress: all.filter(a => ['submitted', 'written_test', 'interview_1', 'interview_2', 'interview_3'].includes(a.currentStatus)).length,
+    inProgress: all.filter(a => ['submitted', 'written_test', 'interview_1', 'interview_2', 'interview_3', 'processing'].includes(a.currentStatus)).length,
     rejected: all.filter(a => a.currentStatus === 'rejected').length,
     notApplied: all.filter(a => a.currentStatus === 'not_applied').length
   }

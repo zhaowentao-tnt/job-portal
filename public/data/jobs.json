@@ -1,4 +1,60 @@
 {
-  "lastUpdated": "2026-07-04",
-  "companies": []
+  "lastUpdated": "2026-07-16",
+  "companies": [
+    {
+      "company": "小鹏汽车",
+      "position": "校招【探索者计划】",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-08",
+      "deadline": "招满即停（不设截止时间）",
+      "requirements": ["3个岗位"],
+      "note": "7月8-9号开始，不设截止时间，招满即停；按照建议可于 2026-07-25 左右投递。",
+      "url": "https://xiaopeng.jobs.feishu.cn/campus/"
+    },
+    {
+      "company": "大疆",
+      "position": "2027 拓疆者 校园招聘",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-07",
+      "deadline": "招满即停（不设截止时间）",
+      "requirements": ["1个岗位"],
+      "note": "7月7日开始，不设截止时间，招满即停；按照建议可于 2026-07-23 左右投递。",
+      "url": "https://careers.dji.com/zh-CN/campus"
+    },
+    {
+      "company": "中兴",
+      "position": "未来领军招聘",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "",
+      "requirements": [],
+      "note": "不影响秋招投递，每人 1 次投递机会。目前没有对应岗位。",
+      "url": ""
+    },
+    {
+      "company": "百度",
+      "position": "2027 管理培训生计划",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-03",
+      "deadline": "2026-08-14",
+      "requirements": [],
+      "note": "不影响秋招，建议于 2026-07-23 左右投递。",
+      "url": "https://talent.baidu.com/jobs/detail/GRADUATE/a20dfb76-4c9d-4814-bd74-7561616e2773"
+    },
+    {
+      "company": "拼多多集团",
+      "position": "2027届校招提前批",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-06",
+      "deadline": "2026-08-23",
+      "requirements": [],
+      "note": "不影响秋招投递，建议于 2026-07-23 左右投递。",
+      "url": "https://careers.pddglobalhr.com/campus/recent/detail?guid=b2fb2adc-101d-4414-9190-2ae6e04683a8&from=home"
+    }
+  ]
 }
