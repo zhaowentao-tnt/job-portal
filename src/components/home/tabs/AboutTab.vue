@@ -1,8 +1,13 @@
 <template>
   <div class="content-inner about" ref="root">
+    <!-- 左上角装饰图 -->
+    <div v-if="data.cornerDecoPath" class="corner-deco">
+      <img :src="'/job-portal/' + data.cornerDecoPath" alt="" />
+    </div>
+
     <!-- ============ HERO ============ -->
-    <section class="hero">
-      <div class="hero-glow"></div>
+    <section class="hero" :style="data.heroBgPath ? { backgroundImage: `url(/job-portal/${data.heroBgPath})` } : {}">
+      <div class="hero-overlay"></div>
       <div class="hero-left">
         <p class="hero-hello">你好，我是</p>
         <h1 class="hero-name">{{ data.name }}</h1>
@@ -171,6 +176,30 @@ const radarOption = computed(() => {
 .content-inner.about {
   --primary: #FF6B35;
   --accent: #00B894;
+  position: relative;
+  padding-top: 20px;
+}
+
+/* ============ 左上角装饰图 ============ */
+.corner-deco {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 140px;
+  height: 140px;
+  z-index: 3;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  opacity: 0.92;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: cornerFloat 5s ease-in-out infinite;
+}
+.corner-deco img { width: 100%; height: 100%; object-fit: cover; }
+.corner-deco:hover { transform: scale(1.08) rotate(2deg); opacity: 1; }
+@keyframes cornerFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(8px) rotate(1deg); }
 }
 
 /* ============ HERO ============ */
@@ -183,9 +212,17 @@ const radarOption = computed(() => {
   padding: 40px 38px;
   border-radius: 24px;
   overflow: hidden;
-  background: linear-gradient(125deg, #FF6B35 0%, #FF8C42 45%, #FFB020 100%);
+  background-color: linear-gradient(125deg, #FF6B35 0%, #FF8C42 45%, #FFB020 100%);
+  background-size: cover;
+  background-position: center;
   color: #fff;
   box-shadow: 0 18px 44px rgba(255, 107, 53, 0.32);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.82) 0%, rgba(255, 140, 66, 0.72) 40%, rgba(0, 30, 60, 0.55) 100%);
+  z-index: 1;
 }
 .hero-glow {
   position: absolute;
@@ -245,14 +282,26 @@ const radarOption = computed(() => {
 
 .hero-right { position: relative; z-index: 2; flex-shrink: 0; }
 .avatar-ring {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   padding: 5px;
   background: conic-gradient(from 180deg, #00B894, #FFB020, #FF6B35, #00B894);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 107, 53, 0.25);
+  animation: ringSpin 10s linear infinite;
 }
-.avatar-img, .avatar-mono {
+@keyframes ringSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.85);
+}
+.avatar-mono {
   width: 100%;
   height: 100%;
   border-radius: 50%;
