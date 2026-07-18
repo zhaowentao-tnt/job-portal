@@ -9,6 +9,21 @@
   "heroBgPath": "data/hero-bg.png",
   "cornerDecoPath": "data/corner-deco.png",
   "summary": "211 财经硕士，两年审计 + 大客户财务 BP 实战。能用 Python 把效率提升 70%，也能从 0 到 1 搭 AI 工具。正从财务审计，转型为用数据驱动决策的产品人。",
+  "manifesto": [
+    "211 财经硕士，两年审计 + 大客户财务 BP 实战",
+    "能用 Python 砍掉 70% 重复工时，也能从 0 到 1 搭 AI 工具",
+    "独挑 6 省 26 市 IPO 尽调，经手上亿条运单核算",
+    "正从财务审计，转型为用数据驱动决策的产品人"
+  ],
+  "transitionStory": {
+    "narrative": "从审计助理到财务BP，我始终在追问：效率还能更高吗？在容诚，我独立完成6省26市IPO尽调，访谈45家主体、盘点154处资产——但我发现，大量时间耗在重复性工作上。在极兔，我开始用Python和Power BI把手工核算改造成自动化流程，效率飙升70%。后来，我用飞书Codex从零搭建了3个AI工具，其中2个被同事日常使用。那一刻我意识到：与其核算数字，不如让数字帮人做决策——这就是我转型产品的起点。",
+    "turningPoints": [
+      { "icon": "🔍", "title": "第一次独立尽调", "desc": "在容诚独挑6省26市IPO尽调，学会在混乱中找到关键线索" },
+      { "icon": "⚡", "title": "用代码消灭重复", "desc": "在极兔用Python+Power BI改造核算流程，效率提升70%" },
+      { "icon": "🤖", "title": "AI工具从0到1落地", "desc": "用飞书Codex搭建3个AI应用，2个被同事日常使用" }
+    ]
+  },
+  "availability": "2026 暑期可实习 · 2027 届应届",
   "links": [
     {
       "label": "GitHub",
@@ -25,19 +40,11 @@
       "type": "email"
     }
   ],
-  "stats": [
-    { "icon": "🗺️", "value": 26, "prefix": "6省", "unit": "市", "label": "IPO 尽调覆盖", "static": false },
-    { "icon": "🤝", "value": 45, "unit": "家", "label": "客户/供应商访谈", "static": false },
-    { "icon": "📦", "value": 154, "unit": "处", "label": "资产盘点", "static": false },
-    { "icon": "⚡", "value": 70, "prefix": "+", "unit": "%", "label": "核算效率提升", "static": false },
-    { "icon": "📊", "value": 1, "unit": "亿+", "label": "明细运单处理", "static": true },
-    { "icon": "📝", "value": 40, "unit": "页+", "label": "行业分析报告", "static": false }
-  ],
   "capabilities": [
     {
       "name": "数据分析",
       "icon": "📊",
-      "color": "#FF6B35",
+      "color": "#4361ee",
       "score": 5,
       "description": "Python 清洗自动化、Stata 跑 DID 实证、Power BI 动态看板——在极兔把核算效率提升 70%。",
       "skills": ["Python", "Stata", "Power BI", "DID模型", "实证分析"]
@@ -45,7 +52,7 @@
     {
       "name": "产品思维",
       "icon": "💡",
-      "color": "#00B894",
+      "color": "#7C5CFC",
       "score": 4,
       "description": "从业务痛点推导需求，做过 IPO 访谈提纲与 S&OP 标准化，具备 0→1 流程优化经验。",
       "skills": ["需求分析", "流程优化", "竞品研究", "行业研究"]
@@ -53,7 +60,7 @@
     {
       "name": "AI 应用",
       "icon": "🤖",
-      "color": "#7C5CFC",
+      "color": "#FFB020",
       "score": 4,
       "description": "用 Claude / WorkBuddy / 飞书妙搭搭多个 AI 应用，小红书抓取系统、3 个财务 AI 工具已落地采纳。",
       "skills": ["飞书妙搭", "Codex", "WorkBuddy", "Claude Code", "DeepSeek"]
@@ -61,14 +68,13 @@
     {
       "name": "业财融合",
       "icon": "📋",
-      "color": "#FFB020",
+      "color": "#06d6a0",
       "score": 5,
       "description": "两年审计 + 大客户财务 BP，懂 IPO 全流程、看得懂报表，也能用数据驱动业务。",
       "skills": ["IPO尽调", "大客户核算", "财务分析", "S&OP标准化"]
     }
   ],
   "contact": [
-    { "icon": "📧", "label": "邮箱", "value": "1462905371@qq.com", "type": "email" },
     { "icon": "📱", "label": "电话", "value": "13589138987", "type": "phone" },
     { "icon": "📍", "label": "所在地", "value": "湖北武汉" },
     { "icon": "🎓", "label": "学校", "value": "中南财经政法大学（211）" }

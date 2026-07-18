@@ -21,6 +21,21 @@
   --danger-light: #fef2f2;
   --tag-bg: #f0f2f8;
 
+  /* === 玻璃拟态 === */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-blur: blur(18px);
+
+  /* === 暗色主题 === */
+  --dark-bg: #0f0f1e;
+  --dark-surface: #151530;
+  --dark-text: #e8ecf8;
+  --dark-text-sub: #9aa0b8;
+
+  /* === 发光 === */
+  --glow-primary: 0 0 40px rgba(67, 97, 238, 0.25);
+  --glow-accent: 0 0 30px rgba(6, 214, 160, 0.2);
+
   /* === 间距 === */
   --radius: 14px;
   --radius-sm: 8px;

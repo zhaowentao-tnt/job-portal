@@ -155,6 +155,41 @@
       </div>
     </div>
 
+    <!-- Manifesto -->
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-title">宣言标语 (关于我暗色大字区, 4行)</span></div>
+      <div v-for="(line, i) in (form.manifesto || [])" :key="i" class="form-group">
+        <label class="form-label">第 {{ i + 1 }} 行</label>
+        <input v-model="form.manifesto[i]" class="form-input" :placeholder="'如：211 财经硕士，两年审计 + 大客户财务 BP 实战'" />
+      </div>
+      <button v-if="!form.manifesto || form.manifesto.length < 4" class="btn-add" @click="addManifestoLine" style="width: auto; padding: 6px 14px;">+ 添加行</button>
+    </div>
+
+    <!-- Transition Story -->
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-title">转型故事</span></div>
+      <div class="form-group">
+        <label class="form-label">求职状态 (一句话)</label>
+        <input v-model="form.availability" class="form-input" placeholder="如：2026 暑期可实习 · 2027 届应届" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">故事叙述</label>
+        <textarea v-model="(form.transitionStory || {}).narrative" class="form-textarea" rows="5" placeholder="从审计到财务BP到产品的心路历程..."></textarea>
+      </div>
+      <div v-if="turningPoints" class="admin-card-header">
+        <span class="admin-card-title" style="font-size: 13px;">转折点</span>
+        <button class="btn-add btn-sm" @click="addTurningPoint" style="width: auto;">+ 添加</button>
+      </div>
+      <div v-for="(tp, i) in turningPoints" :key="i" class="admin-card" style="background: var(--bg); margin-bottom: 8px;">
+        <div class="form-row">
+          <div class="form-group" style="width: 60px;"><label class="form-label">图标</label><input v-model="tp.icon" class="form-input" /></div>
+          <div class="form-group"><label class="form-label">标题</label><input v-model="tp.title" class="form-input" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">描述</label><input v-model="tp.desc" class="form-input" /></div>
+        <button class="btn-danger" @click="removeTurningPoint(i)">删除</button>
+      </div>
+    </div>
+
     <!-- Contact -->
     <div class="admin-card">
       <div class="admin-card-header">
@@ -187,7 +222,7 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue'
+import { reactive, watch, computed } from 'vue'
 import ImageUpload from '../shared/ImageUpload.vue'
 
 const props = defineProps({ data: { type: Object, default: () => ({}) } })
@@ -238,6 +273,25 @@ function addCapability() {
 function addContact() {
   if (!form.contact) form.contact = []
   form.contact.push({ icon: '📍', label: '', value: '' })
+}
+
+function addManifestoLine() {
+  if (!form.manifesto) form.manifesto = []
+  form.manifesto.push('')
+}
+
+const turningPoints = computed(() => {
+  if (!form.transitionStory) form.transitionStory = {}
+  if (!form.transitionStory.turningPoints) form.transitionStory.turningPoints = []
+  return form.transitionStory.turningPoints
+})
+
+function addTurningPoint() {
+  turningPoints.value.push({ icon: '🔍', title: '', desc: '' })
+}
+
+function removeTurningPoint(idx) {
+  turningPoints.value.splice(idx, 1)
 }
 
 function save() {

@@ -1,71 +1,83 @@
 <template>
-  <div class="content-inner about" ref="root">
-    <!-- 左上角装饰图 -->
-    <div v-if="data.cornerDecoPath" class="corner-deco">
-      <img :src="'/job-portal/' + data.cornerDecoPath" alt="" />
-    </div>
-
-    <!-- ============ ELEVATOR PITCH ============ -->
-    <p class="pitch">{{ data.summary }}</p>
-
-    <!-- ============ STATS (滚动计数) ============ -->
-    <div class="stat-grid" ref="statRef">
-      <div v-for="(s, idx) in data.stats" :key="s.label" class="stat-card">
-        <div class="stat-icon">{{ s.icon }}</div>
-        <div class="stat-value">
-          <template v-if="s.static">{{ s.prefix }}{{ s.value }}{{ s.unit }}</template>
-          <template v-else>{{ s.prefix }}{{ displayed[idx] }}{{ s.unit }}</template>
+  <div class="about-wide" ref="root">
+    <!-- ============ A. MANIFESTO 暗色宣言带 ============ -->
+    <section class="manifesto-band">
+      <div class="manifesto-glow left"></div>
+      <div class="manifesto-glow right"></div>
+      <div class="manifesto-inner">
+        <div class="manifesto-text">
+          <p v-for="(line, i) in data.manifesto" :key="i" class="manifesto-line reveal">{{ line }}</p>
+          <div class="manifesto-cta">
+            <a :href="'mailto:' + emailLink" class="cta-btn cta-btn--primary">✉ 发邮件</a>
+            <a :href="ghLink" target="_blank" rel="noopener" class="cta-btn cta-btn--ghost">⌘ GitHub</a>
+            <span v-if="phone" class="cta-phone">{{ phone }}</span>
+          </div>
         </div>
-        <div class="stat-label">{{ s.label }}</div>
+        <div class="manifesto-avatar reveal">
+          <div class="avatar-glow-ring">
+            <img v-if="data.avatarPath" :src="'/job-portal/' + data.avatarPath" class="avatar-img" alt="头像" />
+            <div v-else class="avatar-letter">{{ initial }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ B+C+D. 能力 BENTO + 雷达图 + 快速事实 ============ -->
+    <div class="cap-row">
+      <!-- B: 能力 Bento (2x2 glass) -->
+      <div class="bento-col">
+        <div
+          v-for="cap in data.capabilities"
+          :key="cap.name"
+          class="bento-card glass-card reveal"
+          :style="{ '--cap-color': cap.color }"
+        >
+          <div class="bc-icon">{{ cap.icon }}</div>
+          <div class="bc-name">{{ cap.name }}</div>
+          <p class="bc-desc">{{ cap.description }}</p>
+          <div class="bc-tags">
+            <span v-for="sk in cap.skills" :key="sk" class="bc-tag">{{ sk }}</span>
+          </div>
+        </div>
+      </div>
+      <!-- C: 雷达图 + D: 快速事实 -->
+      <div class="side-col">
+        <div class="radar-card glass-card reveal">
+          <v-chart class="radar-chart" :option="radarOption" autoresize />
+        </div>
+        <div class="facts-card reveal">
+          <div class="facts-item" v-for="f in facts" :key="f.label">
+            <span class="facts-icon">{{ f.icon }}</span>
+            <span class="facts-label">{{ f.label }}</span>
+            <span class="facts-value">{{ f.value }}</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ============ CAPABILITIES ============ -->
-    <h3 class="subsection-title">核心能力</h3>
-    <div class="bento-grid">
-      <div
-        v-for="(cap, idx) in data.capabilities"
-        :key="cap.name"
-        class="bento-card"
-        :class="[`bento-card--${idx % 4}`, idx === 0 || idx === 3 ? 'bento-card--wide' : '']"
-      >
-        <div class="bento-icon" :style="{ background: cap.color + '1f', color: cap.color }">{{ cap.icon }}</div>
-        <div class="bento-head">
-          <h4 class="bento-name">{{ cap.name }}</h4>
-          <span class="bento-score" :style="{ color: cap.color }">{{ '★'.repeat(cap.score) }}<span class="bento-score--dim">{{ '★'.repeat(5 - cap.score) }}</span></span>
-        </div>
-        <p class="bento-desc">{{ cap.description }}</p>
-        <div class="bento-skills">
-          <span v-for="skill in cap.skills" :key="skill" class="tag" :style="{ background: cap.color + '14', color: cap.color, borderColor: cap.color + '38' }">{{ skill }}</span>
+    <!-- ============ E. 转型故事 ============ -->
+    <section v-if="data.transitionStory" class="story-section">
+      <h2 class="story-heading reveal">为什么做产品</h2>
+      <div class="story-body">
+        <p class="story-narrative reveal">{{ data.transitionStory.narrative }}</p>
+        <div class="story-turning reveal">
+          <div
+            v-for="tp in (data.transitionStory.turningPoints || [])"
+            :key="tp.title"
+            class="tp-card"
+          >
+            <div class="tp-icon">{{ tp.icon }}</div>
+            <div class="tp-title">{{ tp.title }}</div>
+            <p class="tp-desc">{{ tp.desc }}</p>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- ============ RADAR ============ -->
-    <div class="card radar-card">
-      <h4 class="radar-title">能力雷达</h4>
-      <v-chart class="radar-chart" :option="radarOption" autoresize />
-    </div>
-
-    <!-- ============ CONTACT ============ -->
-    <div class="card contact-card">
-      <div class="contact-grid">
-        <div v-for="item in data.contact" :key="item.label" class="contact-item">
-          <span class="contact-label">{{ item.icon }} {{ item.label }}</span>
-          <a
-            v-if="item.type === 'email'"
-            :href="`mailto:${item.value}`"
-            class="contact-value contact-link"
-          >{{ item.value }}</a>
-          <span v-else class="contact-value">{{ item.value }}</span>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, reactive, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import VChart from 'vue-echarts'
 import { use } from 'echarts/core'
 import { RadarChart } from 'echarts/charts'
@@ -76,49 +88,47 @@ use([RadarChart, TooltipComponent, LegendComponent, CanvasRenderer])
 
 const props = defineProps({ data: { type: Object, default: () => ({}) } })
 
-const email = computed(() => (props.data.contact || []).find(c => c.type === 'email')?.value || '')
+const initial = computed(() => (props.data.name || '?').trim().charAt(0))
 
-/* ---- 滚动计数动画 ---- */
-const statRef = ref(null)
-const displayed = reactive((props.data.stats || []).map(() => 0))
-let started = false
-function animate(i, target) {
-  const dur = 1300
-  const start = performance.now()
-  const step = (now) => {
-    const p = Math.min((now - start) / dur, 1)
-    const eased = 1 - Math.pow(1 - p, 3)
-    displayed[i] = Math.round(eased * target)
-    if (p < 1) requestAnimationFrame(step)
-  }
-  requestAnimationFrame(step)
-}
-onMounted(() => {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting && !started) {
-        started = true
-        ;(props.data.stats || []).forEach((s, i) => { if (!s.static) animate(i, s.value) })
-      }
-    })
-  }, { threshold: 0.25 })
-  if (statRef.value) io.observe(statRef.value)
+const emailLink = computed(() => {
+  const links = props.data.links || []
+  const email = links.find(l => l.type === 'email')
+  return email?.url || ''
 })
 
-/* ---- 发光雷达 ---- */
+const ghLink = computed(() => {
+  const links = props.data.links || []
+  const gh = links.find(l => l.label?.includes('GitHub'))
+  return gh?.url || '#'
+})
+
+const phone = computed(() => {
+  const c = (props.data.contact || []).find(x => x.type === 'phone')
+  return c?.value || ''
+})
+
+const facts = computed(() => {
+  const c = props.data.contact || []
+  const items = c.filter(x => x.type !== 'phone').map(x => ({ icon: x.icon, label: x.label, value: x.value }))
+  if (props.data.availability) {
+    items.unshift({ icon: '💼', label: '求职状态', value: props.data.availability })
+  }
+  return items
+})
+
 const radarOption = computed(() => {
   const caps = props.data.capabilities || []
   return {
     tooltip: { trigger: 'item' },
     radar: {
       indicator: caps.map(c => ({ name: c.name, max: 5 })),
-      radius: '66%',
-      center: ['50%', '55%'],
-      axisName: { color: '#5b6b7b', fontSize: 12, fontWeight: 600 },
+      radius: '64%',
+      center: ['50%', '56%'],
+      axisName: { color: '#6b7280', fontSize: 11.5, fontWeight: 600 },
       splitNumber: 5,
-      splitArea: { areaStyle: { color: ['rgba(255,107,53,0.03)', 'rgba(0,184,148,0.06)'] } },
-      splitLine: { lineStyle: { color: 'rgba(0,0,0,0.08)' } },
-      axisLine: { lineStyle: { color: 'rgba(0,0,0,0.08)' } }
+      splitArea: { areaStyle: { color: ['rgba(67,97,238,0.03)', 'rgba(6,214,160,0.04)'] } },
+      splitLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } },
+      axisLine: { lineStyle: { color: 'rgba(0,0,0,0.06)' } }
     },
     series: [
       {
@@ -127,189 +137,180 @@ const radarOption = computed(() => {
           {
             value: caps.map(c => c.score || 3),
             name: '能力评分',
-            symbolSize: 6,
-            itemStyle: { color: '#FF6B35' },
-            lineStyle: { color: '#FF6B35', width: 3, shadowBlur: 12, shadowColor: 'rgba(255,107,53,0.55)' },
-            areaStyle: { color: 'rgba(255,107,53,0.28)' }
+            symbolSize: 5,
+            itemStyle: { color: '#4361ee' },
+            lineStyle: { color: '#4361ee', width: 2.5, shadowBlur: 10, shadowColor: 'rgba(67,97,238,0.45)' },
+            areaStyle: { color: 'rgba(67,97,238,0.18)' }
           }
         ]
       }
     ]
   }
 })
+
+const root = ref(null)
+onMounted(() => {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view') })
+  }, { threshold: 0.12 })
+  if (root.value) root.value.querySelectorAll('.reveal').forEach(el => io.observe(el))
+})
 </script>
 
 <style scoped>
-/* 本地主题覆盖：活力橙青 */
-.content-inner.about {
-  --primary: #FF6B35;
-  --accent: #00B894;
+/* ============ MANIFESTO 暗色带 ============ */
+.manifesto-band {
   position: relative;
-  padding-top: 20px;
-}
-
-/* ============ 左上角装饰图 ============ */
-.corner-deco {
-  position: absolute;
-  top: -12px;
-  left: -12px;
-  width: 140px;
-  height: 140px;
-  z-index: 3;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
-  opacity: 0.92;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  animation: cornerFloat 5s ease-in-out infinite;
+  background: linear-gradient(135deg, #0f0f1e 0%, #151530 35%, #1a1e3a 70%, #16213e 100%);
+  margin-bottom: 36px;
 }
-.corner-deco img { width: 100%; height: 100%; object-fit: cover; }
-.corner-deco:hover { transform: scale(1.08) rotate(2deg); opacity: 1; }
-@keyframes cornerFloat {
-  0%, 100% { transform: translateY(0) rotate(-3deg); }
-  50% { transform: translateY(8px) rotate(1deg); }
-}
-
-/* ============ PITCH ============ */
-.pitch {
-  margin: 26px 2px 8px;
-  font-size: 16px;
-  line-height: 1.85;
-  color: var(--text-sub);
-  padding-left: 14px;
-  border-left: 4px solid var(--primary);
-}
-
-/* ============ STATS ============ */
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 22px;
-}
-.stat-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-light);
-  border-radius: 18px;
-  padding: 22px 16px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.stat-card::after {
-  content: '';
+.manifesto-glow {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 107, 53, 0.07), rgba(0, 184, 148, 0.07));
-  opacity: 0;
-  transition: opacity 0.25s;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
 }
-.stat-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(255, 107, 53, 0.16); }
-.stat-card:hover::after { opacity: 1; }
-.stat-icon { font-size: 24px; margin-bottom: 8px; }
-.stat-value {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--primary);
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-  background: linear-gradient(120deg, #FF6B35, #FF922B);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.stat-label { font-size: 12.5px; color: var(--text-sub); margin-top: 6px; }
+.manifesto-glow.left  { left: -80px; top: -100px; background: rgba(67, 97, 238, 0.7); }
+.manifesto-glow.right { right: -60px; bottom: -80px; background: rgba(6, 214, 160, 0.55); }
 
-/* ============ BENTO ============ */
-.subsection-title {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text);
-  margin: 36px 0 18px;
+.manifesto-inner {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 40px;
+  padding: 48px 44px;
 }
-.bento-grid {
+.manifesto-text { flex: 1; }
+.manifesto-line {
+  margin: 0 0 14px;
+  font-size: 26px; font-weight: 800; line-height: 1.45;
+  color: #e8ecf8;
+  letter-spacing: 0.5px;
+}
+.manifesto-line:first-child { color: var(--accent); }
+.manifesto-line:last-child  { font-size: 22px; font-weight: 700; }
+
+.manifesto-cta { display: flex; align-items: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 22px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; text-decoration: none;
+  transition: all 0.25s ease;
+}
+.cta-btn--primary { background: var(--primary); color: #fff; box-shadow: var(--glow-primary); }
+.cta-btn--primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(67,97,238,0.45); }
+.cta-btn--ghost   { background: rgba(255,255,255,0.08); color: #c8cde0; border: 1px solid rgba(255,255,255,0.18); }
+.cta-btn--ghost:hover   { background: rgba(255,255,255,0.15); color: #fff; transform: translateY(-3px); }
+.cta-phone { font-size: 13px; color: #7a82a0; letter-spacing: 0.5px; }
+
+.manifesto-avatar { flex-shrink: 0; }
+.avatar-glow-ring {
+  width: 130px; height: 130px;
+  border-radius: 50%; padding: 4px;
+  background: conic-gradient(from 180deg, var(--accent), var(--primary), var(--accent));
+  box-shadow: 0 0 30px rgba(6,214,160,0.3), 0 10px 30px rgba(0,0,0,0.4);
+  animation: ringSpin 12s linear infinite;
+}
+@keyframes ringSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid rgba(15,15,30,0.8); }
+.avatar-letter {
+  width: 100%; height: 100%; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px; font-weight: 900; color: var(--accent);
+  background: rgba(6,214,160,0.08); border: 3px solid rgba(15,15,30,0.8);
+}
+
+/* ============ CAPABILITY ROW (bento + radar side) ============ */
+.cap-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.bento-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 .bento-card {
-  background: var(--card-bg);
+  padding: 22px;
+  border-left: 3px solid var(--cap-color, var(--primary));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+}
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1), 0 0 20px rgba(var(--cap-color-r), var(--cap-color-g), var(--cap-color-b), 0.12);
+}
+.bc-icon { font-size: 28px; margin-bottom: 6px; }
+.bc-name { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.bc-desc { font-size: 13px; color: var(--text-sub); line-height: 1.65; margin-bottom: 10px; }
+.bc-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.bc-tag {
+  padding: 3px 9px; border-radius: 999px;
+  font-size: 11px; font-weight: 600;
+  background: rgba(67,97,238,0.08); color: var(--primary);
+}
+
+/* Side column */
+.side-col { display: flex; flex-direction: column; gap: 16px; }
+.radar-card { padding: 16px; border-radius: 16px; }
+.radar-chart { width: 100%; height: 300px; }
+
+.facts-card { padding: 18px; background: var(--card-bg); border-radius: 16px; box-shadow: var(--shadow); }
+.facts-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 0; border-bottom: 1px solid var(--border-light);
+}
+.facts-item:last-child { border-bottom: none; }
+.facts-icon { font-size: 18px; flex-shrink: 0; }
+.facts-label { font-size: 12px; color: var(--text-light); min-width: 52px; }
+.facts-value { font-size: 13.5px; font-weight: 600; color: var(--text); margin-left: auto; }
+
+/* ============ TRANSITION STORY ============ */
+.story-section { margin-top: 8px; }
+.story-heading {
+  font-size: 22px; font-weight: 800; color: var(--text);
+  margin-bottom: 22px; letter-spacing: -0.5px;
+}
+.story-body { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.story-narrative {
+  font-size: 15px; color: var(--text-sub); line-height: 1.95;
+  padding: 24px; background: var(--card-bg); border-radius: 18px;
+  box-shadow: var(--shadow); border-left: 4px solid var(--primary);
+}
+.story-turning { display: flex; flex-direction: column; gap: 14px; }
+.tp-card {
+  padding: 18px 20px; border-radius: 16px;
+  background: linear-gradient(135deg, var(--card-bg), rgba(67,97,238,0.03));
+  box-shadow: var(--shadow);
   border: 1px solid var(--border-light);
-  border-radius: 18px;
-  padding: 24px 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  position: relative;
-  overflow: hidden;
 }
-.bento-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--card-accent, var(--primary));
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-.bento-card:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.1); }
-.bento-card:hover::before { opacity: 1; }
-.bento-card--0 { --card-accent: #FF6B35; }
-.bento-card--1 { --card-accent: #00B894; }
-.bento-card--2 { --card-accent: #7C5CFC; }
-.bento-card--3 { --card-accent: #FFB020; }
-.bento-card--wide { grid-column: span 2; }
-.bento-icon {
-  width: 50px; height: 50px;
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 25px; flex-shrink: 0;
-}
-.bento-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.bento-name { font-size: 16px; font-weight: 800; color: var(--text); margin: 0; }
-.bento-score { font-size: 13px; letter-spacing: 1px; }
-.bento-score--dim { color: rgba(0, 0, 0, 0.18); }
-.bento-desc { font-size: 13px; line-height: 1.7; color: var(--text-sub); margin: 0; }
-.bento-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
-.bento-skills .tag {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  border: 1px solid;
-}
+.tp-card:hover { transform: translateX(6px); box-shadow: var(--shadow-hover); }
+.tp-icon { font-size: 28px; margin-bottom: 4px; }
+.tp-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.tp-desc { font-size: 13px; color: var(--text-sub); line-height: 1.55; margin: 0; }
 
-/* ============ RADAR ============ */
-.radar-card { margin-top: 24px; }
-.radar-title { font-size: 16px; font-weight: 700; color: var(--text); margin: 0 0 8px; }
-.radar-chart { width: 100%; height: 330px; }
-
-/* ============ CONTACT ============ */
-.contact-card { margin-top: 24px; }
-.contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.contact-item { display: flex; flex-direction: column; gap: 4px; }
-.contact-label { font-size: 13px; color: var(--text-light); }
-.contact-value { font-size: 14px; font-weight: 600; color: var(--text); }
-.contact-link { color: var(--primary); text-decoration: none; }
-.contact-link:hover { text-decoration: underline; }
+/* ============ REVEAL ============ */
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
-  .stat-grid { grid-template-columns: repeat(2, 1fr); }
-  .bento-grid { grid-template-columns: repeat(2, 1fr); }
-  .bento-card--wide { grid-column: span 2; }
-  .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero { flex-direction: column-reverse; text-align: center; }
-  .hero-tags, .hero-actions { justify-content: center; }
-  .hero-name { font-size: 38px; }
+  .manifesto-inner { flex-direction: column-reverse; text-align: center; padding: 36px 24px; }
+  .manifesto-line { font-size: 21px; }
+  .manifesto-cta { justify-content: center; }
+  .cap-row { grid-template-columns: 1fr; }
+  .story-body { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .stat-grid { grid-template-columns: 1fr; }
-  .bento-grid { grid-template-columns: 1fr; }
-  .bento-card--wide { grid-column: span 1; }
-  .contact-grid { grid-template-columns: 1fr; }
+  .bento-col { grid-template-columns: 1fr; }
+  .manifesto-line { font-size: 18px; }
+  .manifesto-inner { padding: 28px 18px; gap: 24px; }
 }
 </style>

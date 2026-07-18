@@ -51,7 +51,9 @@
 
     <!-- Tab Content -->
     <section class="container tab-content">
-      <component :is="currentTabComponent" :data="currentTabData" />
+      <div :class="currentTabWide ? 'tab-wide' : 'content-inner'">
+        <component :is="currentTabComponent" :data="currentTabData" />
+      </div>
     </section>
   </div>
 </template>
@@ -72,8 +74,8 @@ const isSubnavStuck = ref(false)
 const subnavRef = ref(null)
 
 const tabs = [
-  { id: 'about', label: '关于我', component: AboutTab, dataKey: 'profile' },
-  { id: 'experience', label: '经历', component: ExperienceTab, dataKey: 'experiences' },
+  { id: 'about', label: '关于我', component: AboutTab, dataKey: 'profile', wide: true },
+  { id: 'experience', label: '经历', component: ExperienceTab, dataKey: 'experiences', wide: true },
   { id: 'portfolio', label: '作品集', component: PortfolioTab, dataKey: 'portfolio' },
   { id: 'growth', label: '成长轨迹', component: GrowthTab, dataKey: 'growth' },
   { id: 'life', label: '校园&生活', component: LifeTab, dataKey: 'life' }
@@ -86,6 +88,11 @@ const currentTabComponent = computed(() => {
 const currentTabData = computed(() => {
   const tab = tabs.find(t => t.id === activeTab.value)
   return data.value[tab?.dataKey] || {}
+})
+
+const currentTabWide = computed(() => {
+  const tab = tabs.find(t => t.id === activeTab.value)
+  return tab?.wide || false
 })
 
 const profile = computed(() => data.value.profile || {

@@ -24,14 +24,15 @@
           <div class="form-group"><label class="form-label">结束日期</label><input v-model="edu.endDate" class="form-input" placeholder="2027-06" /></div>
         </div>
         <div class="form-group"><label class="form-label">GPA (可选)</label><input v-model="edu.gpa" class="form-input" /></div>
+        <div class="form-group"><label class="form-label">一句话描述</label><input v-model="edu.description" class="form-input" placeholder="如：财政学硕士，主攻财税政策与实证分析" /></div>
         <div class="form-group"><label class="form-label">亮点 (逗号分隔)</label><input :value="(edu.highlights || []).join(', ')" @input="edu.highlights = $event.target.value.split(',').map(s => s.trim()).filter(Boolean)" class="form-input" /></div>
       </div>
     </div>
 
-    <!-- Work Experience -->
+    <!-- 实习经历 -->
     <div class="admin-card">
       <div class="admin-card-header">
-        <span class="admin-card-title">工作经历</span>
+        <span class="admin-card-title">实习经历</span>
         <button class="btn-add btn-sm" @click="addExp" style="width: auto;">+ 添加</button>
       </div>
       <div v-for="(exp, i) in form.experiences" :key="i" class="admin-card" style="background: var(--bg);">
@@ -83,7 +84,7 @@ watch(() => props.data, (newVal) => {
 }, { deep: true })
 
 function addEdu() {
-  form.education.push({ school: '', degree: '', major: '', startDate: '', endDate: '', gpa: '', highlights: [] })
+  form.education.push({ school: '', degree: '', major: '', department: '', description: '', startDate: '', endDate: '', gpa: '', highlights: [] })
 }
 
 function addExp() {

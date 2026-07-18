@@ -8,6 +8,7 @@
       "startDate": "2024-09",
       "endDate": "2027-06",
       "gpa": "3.82/4.0",
+      "description": "财政学硕士，主攻财税政策与实证分析，GPA 3.82，保研本校",
       "highlights": ["校级二等奖学金", "学术先进个人", "保研本校"]
     },
     {
@@ -18,6 +19,7 @@
       "startDate": "2020-09",
       "endDate": "2024-06",
       "gpa": "3.9/4.3",
+      "description": "经济学本科，专业排名前 5%，连续三年奖学金",
       "highlights": ["专业排名 5/98", "连续3年奖学金", "三好学生×3"]
     }
   ],
@@ -26,15 +28,16 @@
       "company": "极兔速递有限公司",
       "position": "大客户财务BP",
       "department": "大客户财务",
-      "location": "",
+      "location": "上海",
       "startDate": "2026-03",
       "endDate": "2026-06",
       "current": false,
       "description": "负责大客户结算，经手上亿条运单，对账-核算-开票-返款全流程零差错。",
       "metrics": [
-        { "label": "核算效率", "value": 70, "unit": "%" },
-        { "label": "行业报告", "value": 40, "unit": "页" },
-        { "label": "SOP沉淀", "value": 20, "unit": "份" }
+        { "label": "核算效率提升", "value": 70, "unit": "%" },
+        { "label": "行业分析报告", "value": 40, "unit": "页" },
+        { "label": "SOP 沉淀", "value": 20, "unit": "份" },
+        { "label": "运单处理", "value": 1, "unit": "亿+", "isStatic": true }
       ],
       "achievements": [
         "用 Python + Power BI 把单业务核算时长砍掉 70%，告别手工台账",
@@ -46,13 +49,13 @@
       "company": "容诚会计师事务所上海分所",
       "position": "审计助理",
       "department": "",
-      "location": "",
+      "location": "上海",
       "startDate": "2023-12",
       "endDate": "2024-03",
       "current": false,
       "description": "独立承担 IPO 尽调，自主制定访谈与盘点计划，高频出差独立交付。",
       "metrics": [
-        { "label": "覆盖省市", "value": 26, "unit": "市" },
+        { "label": "覆盖", "value": 26, "unit": "市", "prefix": "6省" },
         { "label": "主体访谈", "value": 45, "unit": "家" },
         { "label": "资产盘点", "value": 154, "unit": "处" }
       ],
