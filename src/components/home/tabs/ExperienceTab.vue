@@ -39,8 +39,8 @@
       </div>
     </div>
 
-    <!-- ============ 工作经历 ============ -->
-    <h3 class="subsection-title" style="margin-top: 40px;">工作经历</h3>
+    <!-- ============ 实习经历 ============ -->
+    <h3 class="subsection-title" style="margin-top: 40px;">实习经历</h3>
     <div class="timeline">
       <div
         v-for="exp in data.experiences"

@@ -5,37 +5,6 @@
       <img :src="'/job-portal/' + data.cornerDecoPath" alt="" />
     </div>
 
-    <!-- ============ HERO ============ -->
-    <section class="hero" :style="data.heroBgPath ? { backgroundImage: `url(/job-portal/${data.heroBgPath})` } : {}">
-      <div class="hero-overlay"></div>
-      <div class="hero-left">
-        <p class="hero-hello">你好，我是</p>
-        <h1 class="hero-name">{{ data.name }}</h1>
-        <p class="hero-tag">{{ data.tagline }}</p>
-        <div class="hero-tags">
-          <span class="hero-tag-pill">📊 数据分析</span>
-          <span class="hero-tag-pill">📋 业财融合</span>
-          <span class="hero-tag-pill">🤖 AI 应用</span>
-        </div>
-        <div class="hero-actions">
-          <a
-            v-for="l in data.links"
-            :key="l.label"
-            class="btn"
-            :class="l.primary ? 'btn-primary' : 'btn-ghost'"
-            :href="l.type === 'email' ? 'mailto:' + l.url : l.url"
-            :target="l.type === 'email' ? '_self' : '_blank'"
-          >{{ l.icon }} {{ l.label }}</a>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="avatar-ring">
-          <img v-if="data.avatarPath" :src="'/job-portal/' + data.avatarPath" class="avatar-img" alt="头像" />
-          <div v-else class="avatar-mono">{{ mono }}</div>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ ELEVATOR PITCH ============ -->
     <p class="pitch">{{ data.summary }}</p>
 
@@ -107,7 +76,6 @@ use([RadarChart, TooltipComponent, LegendComponent, CanvasRenderer])
 
 const props = defineProps({ data: { type: Object, default: () => ({}) } })
 
-const mono = computed(() => (props.data.name || '?').trim().charAt(0))
 const email = computed(() => (props.data.contact || []).find(c => c.type === 'email')?.value || '')
 
 /* ---- 滚动计数动画 ---- */
@@ -200,122 +168,6 @@ const radarOption = computed(() => {
 @keyframes cornerFloat {
   0%, 100% { transform: translateY(0) rotate(-3deg); }
   50% { transform: translateY(8px) rotate(1deg); }
-}
-
-/* ============ HERO ============ */
-.hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-  padding: 40px 38px;
-  border-radius: 24px;
-  overflow: hidden;
-  background-color: linear-gradient(125deg, #FF6B35 0%, #FF8C42 45%, #FFB020 100%);
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  box-shadow: 0 18px 44px rgba(255, 107, 53, 0.32);
-}
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 107, 53, 0.82) 0%, rgba(255, 140, 66, 0.72) 40%, rgba(0, 30, 60, 0.55) 100%);
-  z-index: 1;
-}
-.hero-glow {
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  right: -80px;
-  top: -120px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 184, 148, 0.55), transparent 70%);
-  filter: blur(8px);
-  animation: float 6s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(18px); }
-}
-.hero-left { position: relative; z-index: 2; flex: 1; }
-.hero-hello { margin: 0; font-size: 15px; opacity: 0.92; letter-spacing: 1px; }
-.hero-name {
-  margin: 4px 0 6px;
-  font-size: 46px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
-}
-.hero-tag {
-  margin: 0 0 18px;
-  font-size: 17px;
-  font-weight: 600;
-  opacity: 0.97;
-}
-.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-.hero-tag-pill {
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(4px);
-}
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 11px 22px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.btn-primary { background: #fff; color: #FF6B35; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18); }
-.btn-ghost { background: rgba(255, 255, 255, 0.14); color: #fff; border: 1px solid rgba(255, 255, 255, 0.5); }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24); }
-
-.hero-right { position: relative; z-index: 2; flex-shrink: 0; }
-.avatar-ring {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  padding: 5px;
-  background: conic-gradient(from 180deg, #00B894, #FFB020, #FF6B35, #00B894);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 107, 53, 0.25);
-  animation: ringSpin 10s linear infinite;
-}
-@keyframes ringSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.avatar-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid rgba(255,255,255,0.85);
-}
-.avatar-mono {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-}
-.avatar-mono {
-  font-size: 60px;
-  font-weight: 900;
-  color: #FF6B35;
-  background: linear-gradient(135deg, #fff, #fff3ea);
 }
 
 /* ============ PITCH ============ */
