@@ -56,6 +56,7 @@ import GrowthEditor from './GrowthEditor.vue'
 import LifeEditor from './LifeEditor.vue'
 import ApplicationEditor from './ApplicationEditor.vue'
 import JobsEditor from './JobsEditor.vue'
+import InterviewsEditor from './InterviewsEditor.vue'
 
 const { data, saveModule, resetModule, resetAll, hasLocalChanges, exportAll } = useData()
 
@@ -66,7 +67,8 @@ const modules = [
   { key: 'growth', label: '成长轨迹', icon: '🌱', desc: '学习路径、证书、书单', editor: GrowthEditor },
   { key: 'life', label: '校园&生活', icon: '🎓', desc: '社团经历、兴趣爱好、生活照片', editor: LifeEditor },
   { key: 'applications', label: '投递追踪', icon: '📊', desc: '投递记录和进展状态', editor: ApplicationEditor },
-  { key: 'jobs', label: '招聘信息', icon: '📌', desc: '目标公司招聘信息', editor: JobsEditor }
+  { key: 'jobs', label: '招聘信息', icon: '📌', desc: '目标公司招聘信息', editor: JobsEditor },
+  { key: 'interviews', label: '面试记录', icon: '🎤', desc: '面试过程记录与复盘思考', editor: InterviewsEditor }
 ]
 
 const current = ref('profile')

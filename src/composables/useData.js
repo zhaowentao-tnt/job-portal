@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 
-// 7个数据模块
-const MODULES = ['profile', 'experiences', 'portfolio', 'growth', 'life', 'applications', 'jobs']
+// 8个数据模块
+const MODULES = ['profile', 'experiences', 'portfolio', 'growth', 'life', 'applications', 'jobs', 'interviews']
 
 // 单例数据 - 所有组件共享
 const data = ref({})
