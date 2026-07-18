@@ -1,14 +1,14 @@
 {
   "name": "赵文涛",
-  "title": "产品实习生",
-  "tagline": "数据 + 财务 + AI · 跨界产品人",
+  "title": "跨界产品人 · 产品实习生",
+  "tagline": "数据 × 财务 × AI —— 会算账、能落地的产品人",
   "avatar": "",
   "avatarPath": "",
   "logo": "",
   "logoPath": "",
   "heroBg": "",
   "heroBgPath": "",
-  "summary": "中南财经政法大学财政税务学院硕士研究生（本科经济学），具备「数据+财务+AI工具」的复合背景。曾在容诚会计师事务所独立承担6省26市IPO尽调，在极兔速运负责大客户财务BP并通过Python+Power BI实现自动化改造效率提升70%以上。正在从财务审计向互联网产品经理转型，擅长用数据驱动决策、用AI工具提升效率，已独立搭建多个AI应用并获得实际业务采纳。",
+  "summary": "211 财经硕士，两年审计 + 大客户财务 BP 实战。能用 Python 把效率提升 70%，也能从 0 到 1 搭 AI 工具。正从财务审计，转型为用数据驱动决策的产品人。",
   "links": [
     {
       "label": "GitHub",
@@ -25,85 +25,52 @@
       "type": "email"
     }
   ],
+  "stats": [
+    { "icon": "🗺️", "value": 26, "prefix": "6省", "unit": "市", "label": "IPO 尽调覆盖", "static": false },
+    { "icon": "🤝", "value": 45, "unit": "家", "label": "客户/供应商访谈", "static": false },
+    { "icon": "📦", "value": 154, "unit": "处", "label": "资产盘点", "static": false },
+    { "icon": "⚡", "value": 70, "prefix": "+", "unit": "%", "label": "核算效率提升", "static": false },
+    { "icon": "📊", "value": 1, "unit": "亿+", "label": "明细运单处理", "static": true },
+    { "icon": "📝", "value": 40, "unit": "页+", "label": "行业分析报告", "static": false }
+  ],
   "capabilities": [
     {
       "name": "数据分析",
       "icon": "📊",
-      "color": "#4361ee",
-      "description": "能用 Python 做数据清洗与自动化，用 Stata 跑 DID 实证模型，用 Power BI 搭建动态看板。在极兔速运通过 Python 脚本替代人工台账，核算效率提升 70% 以上。",
-      "skills": [
-        "Python",
-        "Stata",
-        "MATLAB",
-        "Power BI",
-        "DID模型",
-        "实证分析"
-      ]
+      "color": "#FF6B35",
+      "score": 5,
+      "description": "Python 清洗自动化、Stata 跑 DID 实证、Power BI 动态看板——在极兔把核算效率提升 70%。",
+      "skills": ["Python", "Stata", "Power BI", "DID模型", "实证分析"]
     },
     {
       "name": "产品思维",
       "icon": "💡",
-      "color": "#06d6a0",
-      "description": "从财务审计跨界产品经理，擅长从业务痛点出发推导产品需求。在容诚 IPO 尽调中独立设计访谈提纲与核查流程，在极兔推动 S&OP 标准化，具备从 0 到 1 的流程优化经验。",
-      "skills": [
-        "需求分析",
-        "流程优化",
-        "竞品研究",
-        "行业研究",
-        "数据看板"
-      ]
+      "color": "#00B894",
+      "score": 4,
+      "description": "从业务痛点推导需求，做过 IPO 访谈提纲与 S&OP 标准化，具备 0→1 流程优化经验。",
+      "skills": ["需求分析", "流程优化", "竞品研究", "行业研究"]
     },
     {
       "name": "AI 应用",
       "icon": "🤖",
-      "color": "#8b5cf6",
-      "description": "活跃使用 Claude Code、WorkBuddy、飞书妙搭等 AI 工具提升工作效率。独立搭建小红书 AI 伙伴抓取系统、3 个飞书妙搭财务 AI 应用，并已在实际业务中落地采纳。",
-      "skills": [
-        "飞书妙搭",
-        "Codex",
-        "WorkBuddy",
-        "Claude Code",
-        "ChatGPT",
-        "DeepSeek",
-        "NotebookLM"
-      ]
+      "color": "#7C5CFC",
+      "score": 4,
+      "description": "用 Claude / WorkBuddy / 飞书妙搭搭多个 AI 应用，小红书抓取系统、3 个财务 AI 工具已落地采纳。",
+      "skills": ["飞书妙搭", "Codex", "WorkBuddy", "Claude Code", "DeepSeek"]
     },
     {
       "name": "业财融合",
       "icon": "📋",
-      "color": "#f59e0b",
-      "description": "两年审计 + 大客户财务 BP 双重背景，熟悉 IPO 尽调全流程（6 省 26 市、45 家主体访谈、154 处资产盘点）。能看懂财务报表，也能用数据工具驱动业务决策。",
-      "skills": [
-        "IPO尽调",
-        "大客户核算",
-        "财务分析",
-        "审计底稿",
-        "S&OP标准化"
-      ]
+      "color": "#FFB020",
+      "score": 5,
+      "description": "两年审计 + 大客户财务 BP，懂 IPO 全流程、看得懂报表，也能用数据驱动业务。",
+      "skills": ["IPO尽调", "大客户核算", "财务分析", "S&OP标准化"]
     }
   ],
   "contact": [
-    {
-      "icon": "📧",
-      "label": "邮箱",
-      "value": "1462905371@qq.com",
-      "type": "email"
-    },
-    {
-      "icon": "📱",
-      "label": "电话",
-      "value": "13589138987",
-      "type": "phone"
-    },
-    {
-      "icon": "📍",
-      "label": "所在地",
-      "value": "湖北武汉"
-    },
-    {
-      "icon": "🎓",
-      "label": "学校",
-      "value": "中南财经政法大学（211）"
-    }
+    { "icon": "📧", "label": "邮箱", "value": "1462905371@qq.com", "type": "email" },
+    { "icon": "📱", "label": "电话", "value": "13589138987", "type": "phone" },
+    { "icon": "📍", "label": "所在地", "value": "湖北武汉" },
+    { "icon": "🎓", "label": "学校", "value": "中南财经政法大学（211）" }
   ]
 }
