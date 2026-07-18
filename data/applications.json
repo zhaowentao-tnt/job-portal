@@ -1,0 +1,481 @@
+{
+  "lastUpdated": "2026-07-16",
+  "statusConfig": {
+    "submitted": { "label": "已投递", "color": "#4361ee" },
+    "processing": { "label": "处理中", "color": "#0ea5e9" },
+    "written_test": { "label": "笔试", "color": "#8b5cf6" },
+    "interview_1": { "label": "面试中", "color": "#f59e0b" },
+    "interview_2": { "label": "二面", "color": "#f97316" },
+    "interview_3": { "label": "三面", "color": "#ea580c" },
+    "offer": { "label": "Offer", "color": "#10b981" },
+    "rejected": { "label": "官网未通过", "color": "#9ca3af" },
+    "withdrawn": { "label": "已放弃", "color": "#d1d5db" },
+    "not_applied": { "label": "未投递", "color": "#cbd5e1" }
+  },
+  "applications": [
+    {
+      "id": "app_001",
+      "company": "vivo",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "有新投递，关注进度" }
+      ],
+      "links": {},
+      "note": "第一梯队·等待中：关注进度，有面试通知及时响应"
+    },
+    {
+      "id": "app_002",
+      "company": "蔚来",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网新投递" }
+      ],
+      "links": {},
+      "note": "第一梯队·等待中：保持关注，也可尝试其他途径"
+    },
+    {
+      "id": "app_003",
+      "company": "安踏",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "interview_1",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "interview_1", "date": "2026-06", "note": "AI面试已完成" }
+      ],
+      "links": {},
+      "note": "第一梯队·等待中：AI面试已做，等后续通知"
+    },
+    {
+      "id": "app_004",
+      "company": "华为",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网无结果" }
+      ],
+      "links": {},
+      "note": "第一梯队·等待秋招：标记秋招开放时间，到点立刻投"
+    },
+    {
+      "id": "app_005",
+      "company": "小鹏",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "",
+      "applyDate": "",
+      "currentStatus": "not_applied",
+      "priority": "high",
+      "statusHistory": [],
+      "links": {},
+      "note": "第二梯队·未投递：尽快去官网/公众号看有没有还在招的岗位"
+    },
+    {
+      "id": "app_006",
+      "company": "迅雷",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "",
+      "applyDate": "",
+      "currentStatus": "not_applied",
+      "priority": "medium",
+      "statusHistory": [],
+      "links": {},
+      "note": "第二梯队·未投递：岗位少也要看一眼，有合适的就投"
+    },
+    {
+      "id": "app_007",
+      "company": "字节跳动",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网投递没可能" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：邮箱投递日常实习，机会偏小但值得试"
+    },
+    {
+      "id": "app_008",
+      "company": "米哈游",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网不通过" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：邮箱投递日常或转正，值得试"
+    },
+    {
+      "id": "app_009",
+      "company": "哔哩哔哩",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网不通过" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：邮箱投递日常或转正，值得试"
+    },
+    {
+      "id": "app_010",
+      "company": "百度",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网转正不可能" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：邮箱投递日常实习，值得试"
+    },
+    {
+      "id": "app_011",
+      "company": "京东",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网基本没戏" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：试试邮箱投递日常实习"
+    },
+    {
+      "id": "app_012",
+      "company": "小红书",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网希望很小" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：再试邮箱或其他途径"
+    },
+    {
+      "id": "app_013",
+      "company": "小米",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网投递不可以" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：尝试邮箱投递日常实习"
+    },
+    {
+      "id": "app_014",
+      "company": "快手",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网投递算了" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：试试邮箱投递"
+    },
+    {
+      "id": "app_015",
+      "company": "OPPO",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网投递不行" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：试一下内推等其他途径"
+    },
+    {
+      "id": "app_016",
+      "company": "网易",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网基本不可以" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：试试其他途径"
+    },
+    {
+      "id": "app_017",
+      "company": "得物",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "rejected", "date": "2026-07", "note": "官网可能性不大" }
+      ],
+      "links": {},
+      "note": "第三梯队·曲线救国：试试其他途径"
+    },
+    {
+      "id": "app_018",
+      "company": "美团",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网转正投递" },
+        { "status": "rejected", "date": "2026-07", "note": "转正投递没戏" }
+      ],
+      "links": {},
+      "note": "第四梯队·投日常：投日常实习，刷简历+积累经验"
+    },
+    {
+      "id": "app_019",
+      "company": "携程",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网转正投递" },
+        { "status": "rejected", "date": "2026-07", "note": "转正投递没戏" }
+      ],
+      "links": {},
+      "note": "第四梯队·投日常：投日常实习"
+    },
+    {
+      "id": "app_020",
+      "company": "滴滴",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "rejected",
+      "priority": "medium",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网转正投递" },
+        { "status": "rejected", "date": "2026-07", "note": "转正投递没戏" }
+      ],
+      "links": {},
+      "note": "第四梯队·投日常：投日常实习"
+    },
+    {
+      "id": "app_021",
+      "company": "阿里巴巴",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "withdrawn",
+      "priority": "low",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "withdrawn", "date": "2026-07", "note": "基本没戏，放弃" }
+      ],
+      "links": {},
+      "note": "第五梯队·基本放弃：官网投递没戏，日常也不多"
+    },
+    {
+      "id": "app_022",
+      "company": "毕马威",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "withdrawn",
+      "priority": "low",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网转正投递" },
+        { "status": "withdrawn", "date": "2026-07", "note": "转正投递没戏" }
+      ],
+      "links": {},
+      "note": "第五梯队·基本放弃"
+    },
+    {
+      "id": "app_023",
+      "company": "普华永道",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "withdrawn",
+      "priority": "low",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "withdrawn", "date": "2026-07", "note": "基本没戏" }
+      ],
+      "links": {},
+      "note": "第五梯队·基本放弃"
+    },
+    {
+      "id": "app_024",
+      "company": "三星",
+      "position": "产品实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-06",
+      "currentStatus": "withdrawn",
+      "priority": "low",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-06", "note": "官网投递" },
+        { "status": "withdrawn", "date": "2026-07", "note": "官网已结束" }
+      ],
+      "links": {},
+      "note": "第五梯队·基本放弃：官网已结束"
+    },
+    {
+      "id": "app_025",
+      "company": "格力",
+      "position": "2026年大学生创新实践营",
+      "department": "",
+      "location": "珠海市",
+      "channel": "官网",
+      "applyDate": "2026-07-04 21:30:40",
+      "currentStatus": "processing",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "processing", "date": "2026-07-04", "note": "申请于 2026-07-04 21:30:40，处理中（已申请），职位编号 G001khqo" }
+      ],
+      "links": { "job": "https://zhaopin.greeyun.com/mine" },
+      "note": "珠海市 · 职位编号 G001khqo · 处理中（已申请）。官网投递进度：https://zhaopin.greeyun.com/mine"
+    },
+    {
+      "id": "app_026",
+      "company": "理想汽车",
+      "position": "营销数据策略实习生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-07-07",
+      "currentStatus": "processing",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "processing", "date": "2026-07-07", "note": "投递于 2026-07-07，还在进程中" }
+      ],
+      "links": { "job": "https://www.lixiang.com/employ/archives.html?fromJob=1" },
+      "note": "投递于 2026-07-07，还在进程中。招聘页：https://www.lixiang.com/employ/archives.html?fromJob=1"
+    },
+    {
+      "id": "app_027",
+      "company": "欧莱雅（中国）",
+      "position": "科技青年咖项目",
+      "department": "",
+      "location": "",
+      "channel": "官网/第三方",
+      "applyDate": "",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-07", "note": "已提交申请" }
+      ],
+      "links": { "job": "https://pc-agent-aiview.hrtps.com/?sid=U2FsdGVkX18SVUvCUl47JkNdjlZKZ4iPADT2YMOH0Gt9tJS46WVA5pMKrpeu%2BQKP#/app/complete/index" },
+      "note": "已提交申请。申请页：https://pc-agent-aiview.hrtps.com/?sid=U2FsdGVkX18SVUvCUl47JkNdjlZKZ4iPADT2YMOH0Gt9tJS46WVA5pMKrpeu%2BQKP#/app/complete/index"
+    },
+    {
+      "id": "app_028",
+      "company": "京东",
+      "position": "2027 TET 管理培训生",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-07", "note": "已投递" }
+      ],
+      "links": { "job": "https://campus.jd.com/#/myDeliver?type=present" },
+      "note": "已投递。我的投递页：https://campus.jd.com/#/myDeliver?type=present"
+    }
+  ]
+}
