@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-16",
+  "lastUpdated": "2026-07-21",
   "companies": [
     {
       "company": "小鹏汽车",
@@ -77,6 +77,17 @@
       "requirements": ["每人每次 1 个职位", "流程结束（共享中）后可重新投递", "不限投递次数"],
       "note": "7月9日开始，不限截止时间。有笔试，建议于 2026-07-23 ~ 07-25 投递，先准备笔试。",
       "url": "https://talent.baidu.com/jobs/list"
+    },
+    {
+      "company": "网易游戏",
+      "position": "2027 校园招聘",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-21",
+      "deadline": "尽早投递",
+      "requirements": [],
+      "note": "7月21日开始，尽早投递，建议于 2026-07-28 左右投递。",
+      "url": "https://campus.game.163.com/?referralCode=oKFLGH"
     }
   ]
 }
