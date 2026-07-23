@@ -116,20 +116,29 @@
           <p v-if="iv.review" class="iv-review">{{ iv.review }}</p>
 
           <div v-if="iv.insights && iv.insights.length" class="iv-insights">
-            <div class="iv-insights-title">💡 面试思考</div>
-            <div
-              v-for="(ins, i) in iv.insights"
-              :key="i"
-              class="iv-insight"
-              :class="{ 'iv-insight--key': ins.key }"
-            >
-              <div class="iv-insight-head">
-                <span class="iv-insight-index">{{ i + 1 }}</span>
-                <span class="iv-insight-title">{{ ins.title }}</span>
-                <span v-if="ins.key" class="iv-key-tag">重点</span>
+            <template v-for="group in insightGroups(iv.insights)" :key="group.label">
+              <div v-if="group.items.length" class="iv-insights-group">
+                <div class="iv-insights-title" :class="group.cls">{{ group.title }}</div>
+                <div
+                  v-for="(ins, i) in group.items"
+                  :key="i"
+                  class="iv-insight"
+                  :class="{ 'iv-insight--key': ins.key }"
+                >
+                  <div class="iv-insight-head">
+                    <span class="iv-insight-index">{{ i + 1 }}</span>
+                    <span class="iv-insight-title">{{ ins.title }}</span>
+                    <span v-if="ins.key" class="iv-key-tag">重点</span>
+                  </div>
+                  <p v-if="ins.content" class="iv-insight-content">{{ ins.content }}</p>
+                  <template v-if="ins.phenomenon || ins.risk || ins.improvement">
+                    <div v-if="ins.phenomenon" class="iv-sub"><span class="iv-sub-label">现象</span><span class="iv-sub-body">{{ ins.phenomenon }}</span></div>
+                    <div v-if="ins.risk" class="iv-sub"><span class="iv-sub-label iv-sub-label--risk">风险</span><span class="iv-sub-body">{{ ins.risk }}</span></div>
+                    <div v-if="ins.improvement" class="iv-sub"><span class="iv-sub-label iv-sub-label--fix">改进</span><span class="iv-sub-body">{{ ins.improvement }}</span></div>
+                  </template>
+                </div>
               </div>
-              <p class="iv-insight-content">{{ ins.content }}</p>
-            </div>
+            </template>
           </div>
         </div>
       </div>
@@ -188,6 +197,14 @@ const ivStats = computed(() => {
     insights: all.reduce((sum, i) => sum + (i.insights?.length || 0), 0)
   }
 })
+
+function insightGroups(list) {
+  return [
+    { label: 'strength', title: '✅ 优点', cls: 'iv-insights-title--strength', items: list.filter(x => x.category === 'strength') },
+    { label: 'weakness', title: '⚠️ 待改进', cls: 'iv-insights-title--weakness', items: list.filter(x => x.category === 'weakness') },
+    { label: 'other', title: '💡 面试思考', cls: '', items: list.filter(x => !x.category) }
+  ]
+}
 
 function getStatusLabel(key) {
   return statusConfig.value[key]?.label || key
@@ -423,6 +440,31 @@ function getStatusStyle(key) {
   color: var(--text);
   margin-bottom: 12px;
 }
+.iv-insights-title--strength { color: #059669; }
+.iv-insights-title--weakness { color: #d97706; }
+.iv-insights-group { margin-bottom: 18px; }
+.iv-sub {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-sub);
+  margin-top: 6px;
+}
+.iv-sub-label {
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #eef2f7;
+  color: var(--text-sub);
+  height: fit-content;
+  margin-top: 1px;
+}
+.iv-sub-label--risk { background: #fde8e8; color: #dc2626; }
+.iv-sub-label--fix { background: #e7f5ee; color: #059669; }
+.iv-sub-body { flex: 1; }
 .iv-insight {
   padding: 14px 16px;
   border-radius: var(--radius-sm);

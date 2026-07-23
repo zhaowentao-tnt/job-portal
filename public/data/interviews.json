@@ -1,6 +1,78 @@
 {
-  "lastUpdated": "2026-07-18",
+  "lastUpdated": "2026-07-23",
   "interviews": [
+    {
+      "id": "iv_jd_logistics_audit_2026",
+      "company": "京东物流",
+      "position": "审计（一面）",
+      "interviewType": "视频面试",
+      "interviewTime": "2026-07-20",
+      "status": "completed",
+      "review": "京东物流审计一面复盘。整体面试态度获认可——沟通顺畅、无对抗感，这是基础分；但在量化表达、主动挂钩岗位、STAR 结构、城市倾向、反问准备、口语表达等维度存在明显改进空间。以下为逐条复盘。",
+      "insights": [
+        {
+          "category": "strength",
+          "title": "态度好，无对抗感",
+          "key": true,
+          "content": "沟通顺畅、不顶牛，面试官整体观感好，这是基础分，要保持。"
+        },
+        {
+          "category": "weakness",
+          "title": "自我介绍\"虚\"，缺量化与结果",
+          "key": true,
+          "phenomenon": "开场没主动给数字+结果，把展示机会让出去；面试官后来追问都很具体（\"一个月内处理千万历史业务\"），说明他看重数字+结果。",
+          "risk": "把展示机会让给追问，陷于被动。",
+          "improvement": "自我介绍主动甩量化成果（数字+结果），别等追问。"
+        },
+        {
+          "category": "weakness",
+          "title": "自曝\"独立写不懂\"",
+          "key": true,
+          "phenomenon": "原话：「独立去写语法还是不懂，配合 AI 任何基础工作都能做」。",
+          "risk": "审计岗要独立做数据/脚本，直接说\"独立写不懂\"= 主动自曝短板。",
+          "improvement": "改为：能用 Python 完成数据清洗和分析，再用 AI 辅助提效，可覆盖场景大幅增加。"
+        },
+        {
+          "category": "weakness",
+          "title": "历史问题讲得散、结论不肯定",
+          "key": true,
+          "phenomenon": "绕很久才到原因，结尾用「应该也是能顺利完成」——不确定语气暴露不自信。",
+          "risk": "给面试官不自信的印象。",
+          "improvement": "用 STAR（背景-任务-行动-结果），结论用肯定句+量化：「梳理 X 笔未核算单据、金额 Y，已上报 Z，6 月底闭环」。"
+        },
+        {
+          "category": "weakness",
+          "title": "求职城市太泛，没接京东",
+          "key": true,
+          "phenomenon": "原话：「4 个一线城市 / 好城市吧」——太虚，完全没体现对京东（北京总部）的倾向。",
+          "risk": "错失表达求职意向、绑定公司的机会。",
+          "improvement": "家在北方，首选北京等一线城市；京东物流总部在北京，正好契合想做的物流审计方向。"
+        },
+        {
+          "category": "weakness",
+          "title": "反问环节弱、准备不足",
+          "phenomenon": "整场只问了 2 个反问。",
+          "risk": "显得准备不充分、思考浅。",
+          "improvement": "备 3-5 个高质量反问，体现思考深度。"
+        },
+        {
+          "category": "weakness",
+          "title": "没主动挂钩\"京东物流审计\"",
+          "key": true,
+          "phenomenon": "全程是面试官在引导关联（\"你接触过物流业务\"），你没主动说「极兔物流资金结算差异的经验，正好契合京东物流审计」。",
+          "risk": "匹配度让面试官替你说，弱。",
+          "improvement": "每段经历结尾加一句「这直接和贵岗的 XX 对应」，主动把匹配度说出来。"
+        },
+        {
+          "category": "weakness",
+          "title": "口语化、填充词多、断句",
+          "key": true,
+          "phenomenon": "「呃 / 就是 / 然后」密集，偶有话说一半。",
+          "risk": "审计岗重逻辑清晰、表达准确，观感受损。",
+          "improvement": "放慢语速，先抛结论再展开；用「第一 / 第二」结构化，减少填充词。"
+        }
+      ]
+    },
     {
       "id": "iv_001",
       "company": "JD YOUNG",
