@@ -2,7 +2,10 @@
   <span class="ce" :class="{ 'is-editing': editing, 'is-empty': !hasValue, 'is-readonly': !editable }">
     <!-- 默认展示态 -->
     <span v-if="!editing" class="ce-display" @click="startEdit" :title="editable ? '点击编辑' : ''">
-      <slot name="display">{{ displayText }}</slot>
+      <slot name="display">
+        <a v-if="isUrl" :href="displayText" target="_blank" rel="noopener noreferrer" class="ce-link" @click.stop>{{ displayText }}</a>
+        <template v-else>{{ displayText }}</template>
+      </slot>
       <span v-if="!hasValue && placeholder && editable" class="ce-placeholder">{{ placeholder }}</span>
     </span>
 
@@ -99,6 +102,11 @@ const displayText = computed(() => {
   return String(props.value ?? '')
 })
 
+const isUrl = computed(() => {
+  const text = displayText.value
+  return typeof text === 'string' && /^https?:\/\/\S+/i.test(text)
+})
+
 async function startEdit(e) {
   if (!editable.value) return // 只读区块：点击文字不触发编辑
   e?.stopPropagation()
@@ -162,6 +170,14 @@ function cancel() {
 .ce-placeholder {
   color: var(--text-light);
   font-style: italic;
+}
+.ce-link {
+  color: var(--primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ce-link:hover {
+  filter: brightness(0.85);
 }
 .ce-input,
 .ce-textarea,

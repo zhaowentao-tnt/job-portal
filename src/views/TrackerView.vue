@@ -89,25 +89,34 @@
 
           <div class="app-timeline">
             <div v-for="(sh, si) in (app.statusHistory || [])" :key="si" class="app-timeline-item">
-              <span class="status-dot" :style="{ background: getStatusColor(sh.status) }"></span>
-              <span class="app-timeline-label">
-                <ClickEdit :value="sh.status" type="select" :options="statusOptions" module="applications" :path="`applications.${realIdx(app)}.statusHistory.${si}.status`" :display="getStatusLabel(sh.status)" />
-              </span>
-              <span class="app-timeline-date">
-                <ClickEdit :value="sh.date" type="date" module="applications" :path="`applications.${realIdx(app)}.statusHistory.${si}.date`" placeholder="日期" />
-              </span>
-              <span class="app-timeline-note">
-                <ClickEdit :value="sh.note" module="applications" :path="`applications.${realIdx(app)}.statusHistory.${si}.note`" placeholder="备注（可空）" />
+              <span class="status-pill" :style="getStatusStyle(sh.status)">
+                <ClickEdit
+                  :value="sh.status"
+                  type="select"
+                  :options="statusOptions"
+                  module="applications"
+                  :path="`applications.${realIdx(app)}.statusHistory.${si}.status`"
+                  :display="getStatusLabel(sh.status)"
+                />
               </span>
               <EditOnly><button class="btn-del-sm" @click="removeHistory(app, si)" title="删除节点">×</button></EditOnly>
             </div>
-            <EditOnly><button class="btn-add-history" @click="addHistory(app)">+ 添加状态节点</button></EditOnly>
-          </div>
 
-          <p class="app-note" v-if="hasNote(app) || alwaysShowNote">
-            <span class="note-label">📝</span>
-            <ClickEdit :value="app.note" module="applications" :path="`applications.${realIdx(app)}.note`" placeholder="备注（可空）" />
-          </p>
+            <EditOnly>
+              <button v-if="addingHistoryAppId !== app.id" class="btn-add-history" @click="openHistoryForm(app)">+ 添加标签</button>
+              <div v-else class="history-form">
+                <select v-model="addingHistoryStatus" class="history-form-select">
+                  <option value="">选择标签</option>
+                  <option v-for="opt in statusOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+                  <option value="__custom__">自定义标签...</option>
+                </select>
+                <input v-if="addingHistoryStatus === '__custom__'" v-model="addingHistoryCustom" type="text" class="history-form-input" placeholder="输入标签名" />
+                <input v-model="addingHistoryDate" type="date" class="history-form-input history-form-date" />
+                <button class="history-form-confirm" @click="confirmAddHistory(app)">确认</button>
+                <button class="history-form-cancel" @click="cancelAddHistory">取消</button>
+              </div>
+            </EditOnly>
+          </div>
         </div>
       </div>
 
@@ -252,6 +261,12 @@ const interviewsLastUpdated = computed(() => data.value.interviews?.lastUpdated 
 
 const currentFilter = ref('inProgress') // 默认只看进行中
 
+// 添加状态标签的临时表单状态
+const addingHistoryAppId = ref(null)
+const addingHistoryStatus = ref('')
+const addingHistoryCustom = ref('')
+const addingHistoryDate = ref('')
+
 const IN_PROGRESS = ['submitted', 'processing', 'written_test', 'interview_1', 'interview_2', 'interview_3', 'offer']
 
 const filteredApps = computed(() => {
@@ -307,10 +322,6 @@ function ivIdx(iv) {
   return interviews.value.findIndex(a => a.id === iv.id)
 }
 
-function hasNote(app) {
-  return app.note && app.note.length > 0
-}
-const alwaysShowNote = false // 改 true 即可始终显示可点击
 
 function insightGroups(list) {
   const all = list || []
@@ -372,11 +383,25 @@ function togglePriority(app) {
   const idx = realIdx(app)
   updateField('applications', `applications.${idx}.priority`, app.priority === 'high' ? '' : 'high')
 }
-function addHistory(app) {
+function openHistoryForm(app) {
+  addingHistoryAppId.value = app.id
+  addingHistoryStatus.value = ''
+  addingHistoryCustom.value = ''
+  addingHistoryDate.value = new Date().toISOString().slice(0, 10)
+}
+function cancelAddHistory() {
+  addingHistoryAppId.value = null
+}
+function confirmAddHistory(app) {
+  const status = addingHistoryStatus.value === '__custom__'
+    ? addingHistoryCustom.value.trim()
+    : addingHistoryStatus.value
+  if (!status) return
   const idx = realIdx(app)
   const today = new Date().toISOString().slice(0, 10)
-  const next = { status: app.currentStatus, date: today, note: '' }
+  const next = { status, date: addingHistoryDate.value || today, note: '' }
   arrayOp('applications', `applications.${idx}.statusHistory`, 'push', next)
+  addingHistoryAppId.value = null
 }
 function removeHistory(app, si) {
   const idx = realIdx(app)
@@ -645,7 +670,7 @@ function toggleInsightKey(iv, catLabel, iInGroup) {
 .app-timeline {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   padding: 12px 0;
   border-top: 1px solid var(--border-light);
   align-items: center;
@@ -653,21 +678,19 @@ function toggleInsightKey(iv, catLabel, iInGroup) {
 .app-timeline-item {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
+  gap: 4px;
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
   font-size: 13px;
-  color: var(--text-sub);
-  background: var(--bg);
-  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.4;
 }
-.app-timeline-item:not(:last-of-type)::after {
-  content: '→';
-  margin-left: 4px;
-  color: var(--text-muted);
-}
-.app-timeline-label { font-weight: 500; }
-.app-timeline-date { color: var(--text-light); font-size: 12px; }
-.app-timeline-note { color: var(--text-light); font-size: 12px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.status-pill .ce { line-height: inherit; }
 .btn-add-history,
 .btn-add-sm {
   background: none;
@@ -685,6 +708,46 @@ function toggleInsightKey(iv, catLabel, iInGroup) {
   border-color: var(--primary);
   color: var(--primary);
   border-style: solid;
+}
+
+/* 添加标签内联表单 */
+.history-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.history-form-select,
+.history-form-input {
+  font-family: var(--font-family);
+  font-size: 13px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--text);
+  outline: none;
+}
+.history-form-select { cursor: pointer; }
+.history-form-input { min-width: 90px; }
+.history-form-date { width: 130px; }
+.history-form-confirm,
+.history-form-cancel {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+.history-form-confirm {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.history-form-cancel {
+  background: var(--card-bg);
+  color: var(--text-sub);
 }
 
 .app-note {
