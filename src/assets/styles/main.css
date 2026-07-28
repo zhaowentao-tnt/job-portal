@@ -19,6 +19,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* === 材质感页面背景（中心深、边缘透光 + 纤维/色斑/放射叶脉 + 磨损卷边）=== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('/job-portal/bg-texture.svg') center / cover no-repeat;
+  pointer-events: none;
+}
+
 a {
   color: var(--primary);
   text-decoration: none;
