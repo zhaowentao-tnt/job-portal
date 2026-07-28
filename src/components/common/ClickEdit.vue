@@ -1,9 +1,9 @@
 <template>
-  <span class="ce" :class="{ 'is-editing': editing, 'is-empty': !hasValue }">
+  <span class="ce" :class="{ 'is-editing': editing, 'is-empty': !hasValue, 'is-readonly': !editable }">
     <!-- 默认展示态 -->
-    <span v-if="!editing" class="ce-display" @click="startEdit" :title="'点击编辑'">
+    <span v-if="!editing" class="ce-display" @click="startEdit" :title="editable ? '点击编辑' : ''">
       <slot name="display">{{ displayText }}</slot>
-      <span v-if="!hasValue && placeholder" class="ce-placeholder">{{ placeholder }}</span>
+      <span v-if="!hasValue && placeholder && editable" class="ce-placeholder">{{ placeholder }}</span>
     </span>
 
     <!-- 编辑态 -->
@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed, nextTick, inject } from 'vue'
 import { useData } from '../../composables/useData'
 
 const props = defineProps({
@@ -65,12 +65,21 @@ const props = defineProps({
   placeholder: { type: String, default: '点击编辑' },
   module: { type: String, default: '' }, // 数据模块名（applications / profile ...）
   path: { type: String, default: '' },   // 字段路径，如 'applications.0.currentStatus'
-  display: { type: String, default: '' } // 强制展示文案（覆盖默认展示）
+  display: { type: String, default: '' }, // 强制展示文案（覆盖默认展示）
+  editable: { type: Boolean, default: null } // 显式强制；null=跟随区块 EditBlock
 })
 
 const emit = defineEmits(['update:value'])
 
 const { updateField } = useData()
+
+// 区块编辑开关：由最近的 EditBlock 通过 provide 注入
+const blockEditable = inject('blockEditable', null)
+const editable = computed(() => {
+  if (props.editable !== null && props.editable !== undefined) return props.editable
+  if (blockEditable) return blockEditable.value
+  return true // 不在任何区块内时，默认可编辑（兜底）
+})
 
 const editing = ref(false)
 const draft = ref('')
@@ -91,6 +100,7 @@ const displayText = computed(() => {
 })
 
 async function startEdit(e) {
+  if (!editable.value) return // 只读区块：点击文字不触发编辑
   e?.stopPropagation()
   draft.value = props.value == null ? '' : String(props.value)
   editing.value = true
@@ -135,6 +145,15 @@ function cancel() {
 .ce-display:hover {
   background: rgba(67, 97, 238, 0.06);
   border-bottom-color: var(--primary);
+}
+/* 只读区块：无任何编辑提示，看起来就是普通文字 */
+.ce.is-readonly .ce-display {
+  cursor: default;
+  border-bottom-color: transparent;
+}
+.ce.is-readonly .ce-display:hover {
+  background: none;
+  border-bottom-color: transparent;
 }
 .ce.is-empty .ce-display {
   color: var(--text-light);

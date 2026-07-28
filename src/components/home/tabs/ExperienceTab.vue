@@ -1,6 +1,7 @@
 <template>
   <div class="exp-wide" ref="root">
     <!-- ============ A. 数据驱动职业跨度条 ============ -->
+    <EditBlock editText="编辑概览" doneText="完成概览">
     <div class="span-wrap">
       <div class="span-track">
         <div
@@ -33,11 +34,13 @@
 
     <!-- 增删按钮 -->
     <div class="toolbar">
-      <button class="btn-add" @click="addEdu">+ 新增教育经历</button>
-      <button class="btn-add" @click="addExp">+ 新增工作经历</button>
+      <EditOnly><button class="btn-add" @click="addEdu">+ 新增教育经历</button></EditOnly>
+      <EditOnly><button class="btn-add" @click="addExp">+ 新增工作经历</button></EditOnly>
     </div>
+    </EditBlock>
 
     <!-- ============ C. 交错时间线 (zigzag) ============ -->
+    <EditBlock editText="编辑经历" doneText="完成经历">
     <div class="zigzag">
       <div class="zigzag-line"></div>
       <div
@@ -61,7 +64,7 @@
             <template v-else>
               <ClickEdit :value="item.title" module="experiences" :path="`experiences.${item._idx}.company`" placeholder="公司名" />
             </template>
-            <button class="btn-del-sm" @click="removeItem(item)" title="删除此条">×</button>
+            <EditOnly><button class="btn-del-sm" @click="removeItem(item)" title="删除此条">×</button></EditOnly>
           </h4>
 
           <p class="zz-subtitle">
@@ -87,9 +90,9 @@
               <span class="tag tag--success">
                 <ClickEdit :value="h" module="experiences" :path="`education.${item._idx}.highlights.${hi}`" placeholder="亮点" />
               </span>
-              <button class="btn-del-x" @click="removeEduHL(item._idx, hi)">×</button>
+              <EditOnly><button class="btn-del-x" @click="removeEduHL(item._idx, hi)">×</button></EditOnly>
             </span>
-            <button class="btn-add-tag" @click="addEduHL(item._idx)">+ 添加亮点</button>
+            <EditOnly><button class="btn-add-tag" @click="addEduHL(item._idx)">+ 添加亮点</button></EditOnly>
           </div>
           <div v-if="item._kind === 'education' && item.gpa" class="zz-gpa">
             GPA <ClickEdit :value="item.gpa" module="experiences" :path="`education.${item._idx}.gpa`" placeholder="如 3.82/4.0" />
@@ -104,9 +107,9 @@
                 <ClickEdit :value="m.value" type="number" module="experiences" :path="`experiences.${item._idx}.metrics.${mi}.value`" placeholder="值" />
                 <ClickEdit :value="m.unit" module="experiences" :path="`experiences.${item._idx}.metrics.${mi}.unit`" placeholder="单位" />
                 <ClickEdit :value="m.prefix || ''" module="experiences" :path="`experiences.${item._idx}.metrics.${mi}.prefix`" placeholder="前缀" />
-                <button class="btn-del-x" @click="removeMetric(item._idx, mi)">×</button>
+                <EditOnly><button class="btn-del-x" @click="removeMetric(item._idx, mi)">×</button></EditOnly>
               </div>
-              <button class="btn-add-tag" @click="addMetric(item._idx)">+ 添加指标</button>
+              <EditOnly><button class="btn-add-tag" @click="addMetric(item._idx)">+ 添加指标</button></EditOnly>
             </div>
           </div>
 
@@ -120,13 +123,14 @@
                 :path="`experiences.${item._idx}.achievements.${ai}`"
                 placeholder="成就描述"
               />
-              <button class="btn-del-x" @click="removeAch(item._idx, ai)">×</button>
+              <EditOnly><button class="btn-del-x" @click="removeAch(item._idx, ai)">×</button></EditOnly>
             </li>
-            <button class="btn-add-tag" @click="addAch(item._idx)">+ 添加成就</button>
+            <EditOnly><button class="btn-add-tag" @click="addAch(item._idx)">+ 添加成就</button></EditOnly>
           </ul>
         </div>
       </div>
     </div>
+    </EditBlock>
   </div>
 </template>
 
@@ -139,6 +143,8 @@ import { GridComponent, TooltipComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 import { useData } from '../../../composables/useData'
 import ClickEdit from '../../common/ClickEdit.vue'
+import EditBlock from '../../common/EditBlock.vue'
+import EditOnly from '../../common/EditOnly.vue'
 
 use([BarChart, GridComponent, TooltipComponent, CanvasRenderer])
 

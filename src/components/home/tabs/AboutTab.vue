@@ -1,6 +1,7 @@
 <template>
   <div class="about-wide" ref="root">
     <!-- ============ A. MANIFESTO 暗色宣言带 ============ -->
+    <EditBlock editText="编辑宣言" doneText="完成宣言">
     <section class="manifesto-band">
       <div class="manifesto-glow left"></div>
       <div class="manifesto-glow right"></div>
@@ -13,14 +14,16 @@
               :path="`manifesto.${i}`"
               placeholder="宣言行（点击编辑）"
             />
-            <button class="btn-del-sm" @click="removeLine(i)" title="删除该行">×</button>
+            <EditOnly><button class="btn-del-sm" @click="removeLine(i)" title="删除该行">×</button></EditOnly>
           </div>
-          <button class="btn-add-line" @click="addLine">+ 添加一行</button>
+          <EditOnly><button class="btn-add-line" @click="addLine">+ 添加一行</button></EditOnly>
         </div>
       </div>
     </section>
+    </EditBlock>
 
     <!-- ============ B+C+D. 能力 BENTO + 雷达图 + 快速事实 ============ -->
+    <EditBlock editText="编辑能力" doneText="完成能力">
     <div class="cap-row">
       <!-- B: 能力 Bento -->
       <div class="bento-col">
@@ -32,7 +35,7 @@
         >
           <div class="bc-head">
             <ClickEdit :value="cap.icon" module="profile" :path="`capabilities.${i}.icon`" placeholder="📊" />
-            <button class="btn-del-sm" @click="removeCap(i)" title="删除能力">×</button>
+            <EditOnly><button class="btn-del-sm" @click="removeCap(i)" title="删除能力">×</button></EditOnly>
           </div>
           <div class="bc-name">
             <ClickEdit :value="cap.name" module="profile" :path="`capabilities.${i}.name`" placeholder="能力名" />
@@ -43,9 +46,9 @@
           <div class="bc-tags">
             <span v-for="(sk, si) in (cap.skills || [])" :key="si" class="bc-tag-wrap">
               <ClickEdit :value="sk" module="profile" :path="`capabilities.${i}.skills.${si}`" placeholder="技能" />
-              <button class="btn-del-x" @click="removeSkill(i, si)" title="删除">×</button>
+              <EditOnly><button class="btn-del-x" @click="removeSkill(i, si)" title="删除">×</button></EditOnly>
             </span>
-            <button class="bc-tag bc-tag--add" @click="addSkill(i)">+</button>
+            <EditOnly><button class="bc-tag bc-tag--add" @click="addSkill(i)">+</button></EditOnly>
           </div>
           <div class="bc-score">
             评分：
@@ -62,7 +65,7 @@
             </span>
           </div>
         </div>
-        <button class="btn-add-cap" @click="addCap">+ 添加能力</button>
+        <EditOnly><button class="btn-add-cap" @click="addCap">+ 添加能力</button></EditOnly>
       </div>
 
       <!-- C: 雷达图 + D: 快速事实 -->
@@ -86,14 +89,16 @@
             <span class="facts-value">
               <ClickEdit :value="f.value" module="profile" :path="`contact.${f._idx}.value`" placeholder="值" />
             </span>
-            <button class="btn-del-sm" @click="removeContact(f._idx)" title="删除该条">×</button>
+            <EditOnly><button class="btn-del-sm" @click="removeContact(f._idx)" title="删除该条">×</button></EditOnly>
           </div>
-          <button class="btn-add-fact" @click="addContact">+ 添加事实</button>
+          <EditOnly><button class="btn-add-fact" @click="addContact">+ 添加事实</button></EditOnly>
         </div>
       </div>
     </div>
+    </EditBlock>
 
     <!-- ============ E. 转型故事 ============ -->
+    <EditBlock editText="编辑故事" doneText="完成故事">
     <section v-if="data.transitionStory" class="story-section">
       <h2 class="story-heading reveal">为什么做产品</h2>
       <div class="story-body">
@@ -116,7 +121,7 @@
               <div class="tp-icon">
                 <ClickEdit :value="tp.icon" module="profile" :path="`transitionStory.turningPoints.${i}.icon`" placeholder="🔍" />
               </div>
-              <button class="btn-del-sm" @click="removeTp(i)" title="删除">×</button>
+              <EditOnly><button class="btn-del-sm" @click="removeTp(i)" title="删除">×</button></EditOnly>
             </div>
             <div class="tp-title">
               <ClickEdit :value="tp.title" module="profile" :path="`transitionStory.turningPoints.${i}.title`" placeholder="小标题" />
@@ -125,10 +130,11 @@
               <ClickEdit :value="tp.desc" module="profile" :path="`transitionStory.turningPoints.${i}.desc`" placeholder="说明" />
             </p>
           </div>
-          <button class="btn-add-tp" @click="addTp">+ 添加转折点</button>
+          <EditOnly><button class="btn-add-tp" @click="addTp">+ 添加转折点</button></EditOnly>
         </div>
       </div>
     </section>
+    </EditBlock>
   </div>
 </template>
 
@@ -141,6 +147,8 @@ import { TooltipComponent, LegendComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 import { useData } from '../../../composables/useData'
 import ClickEdit from '../../common/ClickEdit.vue'
+import EditBlock from '../../common/EditBlock.vue'
+import EditOnly from '../../common/EditOnly.vue'
 
 use([RadarChart, TooltipComponent, LegendComponent, CanvasRenderer])
 

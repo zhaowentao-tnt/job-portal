@@ -17,6 +17,7 @@
 
     <!-- ============ 投递记录 ============ -->
     <div v-show="activeBlock === 'apps'">
+      <EditBlock editText="编辑投递" doneText="完成投递">
       <!-- KPI 卡片（可点击筛选） -->
       <div class="stats-grid">
         <button class="card stat-card stat-btn" :class="{ 'stat-btn--active': currentFilter === 'all' }" @click="currentFilter = 'all'">
@@ -39,7 +40,7 @@
 
       <!-- 新增投递按钮 -->
       <div class="toolbar">
-        <button class="btn btn--primary btn-sm" @click="addApp">+ 新增投递</button>
+        <EditOnly><button class="btn btn--primary btn-sm" @click="addApp">+ 新增投递</button></EditOnly>
         <span class="toolbar-hint">当前显示 {{ filteredApps.length }} 条 · 默认只看「进行中」</span>
       </div>
 
@@ -73,7 +74,7 @@
                   </span>
                 </template>
               </ClickEdit>
-              <button class="btn-del" @click="removeApp(app.id)" title="删除此投递">×</button>
+              <EditOnly><button class="btn-del" @click="removeApp(app.id)" title="删除此投递">×</button></EditOnly>
             </div>
           </div>
 
@@ -81,9 +82,9 @@
             <span>📍 <ClickEdit :value="app.location" module="applications" :path="`applications.${realIdx(app)}.location`" placeholder="地点" /></span>
             <span>📅 <ClickEdit :value="app.applyDate" type="date" module="applications" :path="`applications.${realIdx(app)}.applyDate`" placeholder="申请日期" /></span>
             <span>🔗 <ClickEdit :value="app.channel" module="applications" :path="`applications.${realIdx(app)}.channel`" placeholder="投递渠道" /></span>
-            <button class="priority-toggle" :class="{ 'priority-toggle--on': app.priority === 'high' }" @click="togglePriority(app)" :title="app.priority === 'high' ? '取消高优先级' : '设为高优先级'">
+            <EditOnly><button class="priority-toggle" :class="{ 'priority-toggle--on': app.priority === 'high' }" @click="togglePriority(app)" :title="app.priority === 'high' ? '取消高优先级' : '设为高优先级'">
               {{ app.priority === 'high' ? '⭐ 高优先级' : '☆ 普通' }}
-            </button>
+            </button></EditOnly>
           </div>
 
           <div class="app-timeline">
@@ -98,9 +99,9 @@
               <span class="app-timeline-note">
                 <ClickEdit :value="sh.note" module="applications" :path="`applications.${realIdx(app)}.statusHistory.${si}.note`" placeholder="备注（可空）" />
               </span>
-              <button class="btn-del-sm" @click="removeHistory(app, si)" title="删除节点">×</button>
+              <EditOnly><button class="btn-del-sm" @click="removeHistory(app, si)" title="删除节点">×</button></EditOnly>
             </div>
-            <button class="btn-add-history" @click="addHistory(app)">+ 添加状态节点</button>
+            <EditOnly><button class="btn-add-history" @click="addHistory(app)">+ 添加状态节点</button></EditOnly>
           </div>
 
           <p class="app-note" v-if="hasNote(app) || alwaysShowNote">
@@ -113,12 +114,14 @@
       <div v-if="!filteredApps.length" class="empty-state">
         <div class="empty-state-icon">📭</div>
         <p>暂无投递记录</p>
-        <p style="font-size: 13px; margin-top: 8px;">点击右上角「+ 新增投递」开始</p>
+        <p style="font-size: 13px; margin-top: 8px;">点击「编辑投递」后新增</p>
       </div>
+      </EditBlock>
     </div>
 
     <!-- ============ 面试记录 ============ -->
     <div v-show="activeBlock === 'interviews'">
+      <EditBlock editText="编辑面试" doneText="完成面试">
       <div class="stats-grid iv-stats">
         <div class="card stat-card">
           <div class="stat-num">{{ ivStats.total }}</div>
@@ -139,7 +142,7 @@
       </div>
 
       <div class="toolbar">
-        <button class="btn btn--primary btn-sm" @click="addInterview">+ 新增面试复盘</button>
+        <EditOnly><button class="btn btn--primary btn-sm" @click="addInterview">+ 新增面试复盘</button></EditOnly>
         <span class="toolbar-hint">共 {{ interviews.length }} 场</span>
       </div>
 
@@ -169,7 +172,7 @@
                   </span>
                 </template>
               </ClickEdit>
-              <button class="btn-del" @click="removeInterview(iv.id)" title="删除此面试">×</button>
+              <EditOnly><button class="btn-del" @click="removeInterview(iv.id)" title="删除此面试">×</button></EditOnly>
             </div>
           </div>
 
@@ -187,7 +190,7 @@
               <div v-if="group.items.length" class="iv-insights-group">
                 <div class="iv-insights-title-row">
                   <div class="iv-insights-title" :class="group.cls">{{ group.title }}</div>
-                  <button class="btn-add-sm" @click="addInsight(iv, group.label)">+ 添加</button>
+                  <EditOnly><button class="btn-add-sm" @click="addInsight(iv, group.label)">+ 添加</button></EditOnly>
                 </div>
                 <div
                   v-for="(ins, i) in group.items"
@@ -200,9 +203,9 @@
                     <span class="iv-insight-title">
                       <ClickEdit :value="ins.title" module="interviews" :path="`interviews.${ivIdx(iv)}.insights.${insGlobalIdx(iv, group.label, i)}.title`" placeholder="要点标题" />
                     </span>
-                    <button class="key-toggle" :class="{ 'key-toggle--on': ins.key }" @click="toggleInsightKey(iv, group.label, i)" :title="ins.key ? '取消重点' : '标记为重点'">
+                    <EditOnly><button class="key-toggle" :class="{ 'key-toggle--on': ins.key }" @click="toggleInsightKey(iv, group.label, i)" :title="ins.key ? '取消重点' : '标记为重点'">
                       {{ ins.key ? '★ 重点' : '☆ 标记重点' }}
-                    </button>
+                    </button></EditOnly>
                     <button class="btn-del-sm" @click="removeInsight(iv, group.label, i)" title="删除此条">×</button>
                   </div>
                   <p class="iv-insight-content">
@@ -223,8 +226,9 @@
       <div v-if="!interviews.length" class="empty-state">
         <div class="empty-state-icon">🎤</div>
         <p>暂无面试记录</p>
-        <p style="font-size: 13px; margin-top: 8px;">点击「+ 新增面试复盘」开始</p>
+        <p style="font-size: 13px; margin-top: 8px;">点击「编辑面试」后新增</p>
       </div>
+      </EditBlock>
     </div>
   </div>
 </template>
@@ -233,6 +237,8 @@
 import { ref, computed } from 'vue'
 import { useData } from '../composables/useData'
 import ClickEdit from '../components/common/ClickEdit.vue'
+import EditBlock from '../components/common/EditBlock.vue'
+import EditOnly from '../components/common/EditOnly.vue'
 
 const { data, updateField, arrayOp } = useData()
 

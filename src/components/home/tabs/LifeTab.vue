@@ -1,8 +1,9 @@
 <template>
+  <EditBlock editText="编辑校园生活" doneText="完成校园生活">
   <div class="content-inner">
     <div class="head-row">
       <h2 class="section-title">校园 & 生活</h2>
-      <button class="btn-add" @click="addCampus">+ 社团经历</button>
+      <EditOnly><button class="btn-add" @click="addCampus">+ 社团经历</button></EditOnly>
     </div>
 
     <!-- Campus -->
@@ -19,7 +20,7 @@
               <ClickEdit :value="role.organization" module="life" :path="`campus.${ri}.organization`" placeholder="组织" />
             </p>
           </div>
-          <button class="btn-del-x" @click="removeCampus(ri)">×</button>
+          <EditOnly><button class="btn-del-x" @click="removeCampus(ri)">×</button></EditOnly>
         </div>
         <p class="campus-period">
           <ClickEdit :value="role.period" module="life" :path="`campus.${ri}.period`" placeholder="时间段" />
@@ -27,10 +28,10 @@
         <ul v-if="role.achievements && role.achievements.length" class="campus-achievements">
           <li v-for="(a, ai) in role.achievements" :key="ai" class="ach-row">
             <ClickEdit :value="a" type="longtext" module="life" :path="`campus.${ri}.achievements.${ai}`" placeholder="成就" />
-            <button class="btn-del-x" @click="removeAch(ri, ai)">×</button>
+            <EditOnly><button class="btn-del-x" @click="removeAch(ri, ai)">×</button></EditOnly>
           </li>
         </ul>
-        <button class="btn-add-tag" @click="addAch(ri)">+ 添加成就</button>
+        <EditOnly><button class="btn-add-tag" @click="addAch(ri)">+ 添加成就</button></EditOnly>
       </div>
     </div>
     <div v-else class="empty-state"><div class="empty-state-icon">🎓</div><p>暂无社团经历</p></div>
@@ -42,9 +43,9 @@
         <span class="interest-tag" :style="getInterestStyle(i)">
           <ClickEdit :value="interest" module="life" :path="`interests.${i}`" placeholder="兴趣" />
         </span>
-        <button class="btn-del-x" @click="removeInterest(i)">×</button>
+        <EditOnly><button class="btn-del-x" @click="removeInterest(i)">×</button></EditOnly>
       </span>
-      <button class="btn-add-tag" @click="addInterest">+ 添加</button>
+      <EditOnly><button class="btn-add-tag" @click="addInterest">+ 添加</button></EditOnly>
     </div>
     <div v-else class="empty-state"><div class="empty-state-icon">💫</div><p>暂无兴趣记录</p></div>
 
@@ -57,10 +58,13 @@
       </div>
     </div>
   </div>
+  </EditBlock>
 </template>
 
 <script setup>
 import ClickEdit from '../../common/ClickEdit.vue'
+import EditBlock from '../../common/EditBlock.vue'
+import EditOnly from '../../common/EditOnly.vue'
 import { useData } from '../../../composables/useData'
 
 defineProps({ data: { type: Object, default: () => ({}) } })

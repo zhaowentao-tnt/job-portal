@@ -1,11 +1,12 @@
 <template>
+  <EditBlock editText="编辑成长轨迹" doneText="完成成长轨迹">
   <div class="content-inner">
     <div class="head-row">
       <h2 class="section-title">成长轨迹</h2>
       <div class="head-btns">
-        <button class="btn-add" @click="addPath">+ 学习路径</button>
-        <button class="btn-add" @click="addCert">+ 证书</button>
-        <button class="btn-add" @click="addBook">+ 书</button>
+        <EditOnly><button class="btn-add" @click="addPath">+ 学习路径</button></EditOnly>
+        <EditOnly><button class="btn-add" @click="addCert">+ 证书</button></EditOnly>
+        <EditOnly><button class="btn-add" @click="addBook">+ 书</button></EditOnly>
       </div>
     </div>
 
@@ -19,7 +20,7 @@
         <span class="path-name" :style="{ color: path.color }">
           <ClickEdit :value="path.name" module="growth" :path="`learningPaths.${pi}.name`" placeholder="路径名" />
         </span>
-        <button class="btn-del-sm" @click="removePath(pi)">×</button>
+        <EditOnly><button class="btn-del-sm" @click="removePath(pi)">×</button></EditOnly>
       </div>
       <div class="timeline" :style="{ '--line-color': path.color }">
         <div v-for="(item, ii) in (path.items || [])" :key="ii" class="timeline-item" :style="{ borderColor: path.color }">
@@ -29,9 +30,9 @@
           <p class="timeline-desc">
             <ClickEdit :value="item.content" type="longtext" module="growth" :path="`learningPaths.${pi}.items.${ii}.content`" placeholder="内容" />
           </p>
-          <button class="btn-del-x" @click="removePathItem(pi, ii)">×</button>
+          <EditOnly><button class="btn-del-x" @click="removePathItem(pi, ii)">×</button></EditOnly>
         </div>
-        <button class="btn-add-tag" @click="addPathItem(pi)">+ 添加节点</button>
+        <EditOnly><button class="btn-add-tag" @click="addPathItem(pi)">+ 添加节点</button></EditOnly>
       </div>
     </div>
 
@@ -53,7 +54,7 @@
             <ClickEdit :value="cert.date" module="growth" :path="`certificates.${ci}.date`" placeholder="日期" />
           </p>
         </div>
-        <button class="btn-del-x" @click="removeCert(ci)">×</button>
+        <EditOnly><button class="btn-del-x" @click="removeCert(ci)">×</button></EditOnly>
       </div>
     </div>
     <div v-else class="empty-state"><div class="empty-state-icon">🏅</div><p>暂无证书记录</p></div>
@@ -82,15 +83,18 @@
             <span class="tag" :class="book.status === '已读' ? 'tag--success' : 'tag--primary'">{{ book.status || '未分类' }}</span>
           </template>
         </ClickEdit>
-        <button class="btn-del-x" @click="removeBook(bi)">×</button>
+        <EditOnly><button class="btn-del-x" @click="removeBook(bi)">×</button></EditOnly>
       </div>
     </div>
     <div v-else class="empty-state"><div class="empty-state-icon">📖</div><p>暂无书单记录</p></div>
   </div>
+  </EditBlock>
 </template>
 
 <script setup>
 import ClickEdit from '../../common/ClickEdit.vue'
+import EditBlock from '../../common/EditBlock.vue'
+import EditOnly from '../../common/EditOnly.vue'
 import { useData } from '../../../composables/useData'
 
 defineProps({ data: { type: Object, default: () => ({}) } })

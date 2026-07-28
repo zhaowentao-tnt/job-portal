@@ -1,8 +1,9 @@
 <template>
+  <EditBlock editText="编辑作品集" doneText="完成作品集">
   <div class="content-inner">
     <div class="head-row">
       <h2 class="section-title">作品集</h2>
-      <button class="btn-add" @click="addItem">+ 新增作品</button>
+      <EditOnly><button class="btn-add" @click="addItem">+ 新增作品</button></EditOnly>
     </div>
 
     <!-- Category filter -->
@@ -69,9 +70,9 @@
                     placeholder="技术"
                   />
                 </span>
-                <button class="btn-del-x" @click.stop="removeTech(item, ti)">×</button>
+                <EditOnly><button class="btn-del-x" @click.stop="removeTech(item, ti)">×</button></EditOnly>
               </span>
-              <button class="btn-add-tag" @click.stop="addTech(item)">+ 技术</button>
+              <EditOnly><button class="btn-add-tag" @click.stop="addTech(item)">+ 技术</button></EditOnly>
             </div>
             <div class="featured-footer">
               <ClickEdit
@@ -80,7 +81,7 @@
                 :path="`items.${realIdx(item)}.date`"
                 placeholder="时间"
               />
-              <button class="btn-del-card" @click.stop="removeItem(item)" title="删除">×</button>
+              <EditOnly><button class="btn-del-card" @click.stop="removeItem(item)" title="删除">×</button></EditOnly>
             </div>
           </div>
         </div>
@@ -112,7 +113,7 @@
                 <ClickEdit :value="item.category" module="portfolio" :path="`items.${realIdx(item)}.category`" placeholder="分类" />
               </span>
               <ClickEdit :value="item.date" module="portfolio" :path="`items.${realIdx(item)}.date`" placeholder="时间" />
-              <button class="btn-del-card" @click.stop="removeItem(item)" title="删除">×</button>
+              <EditOnly><button class="btn-del-card" @click.stop="removeItem(item)" title="删除">×</button></EditOnly>
             </div>
           </div>
         </div>
@@ -122,7 +123,7 @@
     <div v-if="!featuredItems.length && !otherItems.length" class="empty-state">
       <div class="empty-state-icon">📂</div>
       <p>暂无作品</p>
-      <button class="btn-add" @click="addItem" style="margin-top: 12px;">+ 新增作品</button>
+      <EditOnly><button class="btn-add" @click="addItem" style="margin-top: 12px;">+ 新增作品</button></EditOnly>
     </div>
 
     <!-- Detail Modal -->
@@ -138,7 +139,7 @@
           <span class="detail-date">
             <ClickEdit :value="selectedItem.date" module="portfolio" :path="`items.${realIdx(selectedItem)}.date`" placeholder="时间" />
           </span>
-          <button class="btn-del-card" @click="removeItem(selectedItem); selectedItem = null">删除</button>
+          <EditOnly><button class="btn-del-card" @click="removeItem(selectedItem); selectedItem = null">删除</button></EditOnly>
         </div>
         <p class="detail-desc">
           <ClickEdit :value="selectedItem.description" type="longtext" module="portfolio" :path="`items.${realIdx(selectedItem)}.description`" placeholder="描述" />
@@ -151,9 +152,9 @@
           <ul>
             <li v-for="(h, hi) in selectedItem.highlights" :key="hi" class="hl-row">
               <ClickEdit :value="h" module="portfolio" :path="`items.${realIdx(selectedItem)}.highlights.${hi}`" placeholder="亮点" />
-              <button class="btn-del-x" @click="removeHL(selectedItem, hi)">×</button>
+              <EditOnly><button class="btn-del-x" @click="removeHL(selectedItem, hi)">×</button></EditOnly>
             </li>
-            <button class="btn-add-tag" @click="addHL(selectedItem)">+ 添加亮点</button>
+            <EditOnly><button class="btn-add-tag" @click="addHL(selectedItem)">+ 添加亮点</button></EditOnly>
           </ul>
         </div>
         <div class="detail-tech">
@@ -165,18 +166,21 @@
               </span>
               <button class="btn-del-x" @click="removeTech(selectedItem, ti)">×</button>
             </span>
-            <button class="btn-add-tag" @click="addTech(selectedItem)">+ 添加技术</button>
+            <EditOnly><button class="btn-add-tag" @click="addTech(selectedItem)">+ 添加技术</button></EditOnly>
           </div>
         </div>
       </div>
     </Modal>
   </div>
+  </EditBlock>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import Modal from '../../shared/Modal.vue'
 import ClickEdit from '../../common/ClickEdit.vue'
+import EditBlock from '../../common/EditBlock.vue'
+import EditOnly from '../../common/EditOnly.vue'
 import { useData } from '../../../composables/useData'
 
 const props = defineProps({ data: { type: Object, default: () => ({}) } })

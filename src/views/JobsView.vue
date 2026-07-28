@@ -5,7 +5,7 @@
         <h1 class="page-title">招聘信息</h1>
         <p class="page-sub" v-if="data.lastUpdated">最后更新：{{ data.lastUpdated }}</p>
       </div>
-      <button class="btn-add" @click="addCompany">+ 添加招聘</button>
+      <EditOnly><button class="btn-add" @click="addCompany">+ 添加招聘</button></EditOnly>
     </div>
 
     <!-- Status filter -->
@@ -22,6 +22,7 @@
     </div>
 
     <!-- Job cards -->
+    <EditBlock editText="编辑招聘" doneText="完成招聘">
     <div v-if="filteredCompanies.length" class="jobs-grid">
       <div v-for="(company, i) in filteredCompanies" :key="company.id || i" class="card job-card">
         <div class="job-header">
@@ -47,7 +48,7 @@
                 </span>
               </template>
             </ClickEdit>
-            <button class="btn-del-x" @click="removeCompany(company.id)">×</button>
+            <EditOnly><button class="btn-del-x" @click="removeCompany(company.id)">×</button></EditOnly>
           </div>
         </div>
 
@@ -62,9 +63,9 @@
             <span class="tag">
               <ClickEdit :value="r" module="jobs" :path="`companies.${realIdx(company)}.requirements.${ri}`" placeholder="要求" />
             </span>
-            <button class="btn-del-x" @click="removeReq(company, ri)">×</button>
+            <EditOnly><button class="btn-del-x" @click="removeReq(company, ri)">×</button></EditOnly>
           </span>
-          <button class="btn-add-tag" @click="addReq(company)">+ 要求</button>
+          <EditOnly><button class="btn-add-tag" @click="addReq(company)">+ 要求</button></EditOnly>
         </div>
 
         <p class="job-note">
@@ -81,8 +82,9 @@
     <div v-else class="empty-state">
       <div class="empty-state-icon">📋</div>
       <p>暂无招聘信息</p>
-      <button class="btn-add" @click="addCompany" style="margin-top: 12px;">+ 添加招聘</button>
+      <EditOnly><button class="btn-add" @click="addCompany" style="margin-top: 12px;">+ 添加招聘</button></EditOnly>
     </div>
+    </EditBlock>
   </div>
 </template>
 
@@ -90,6 +92,8 @@
 import { ref, computed } from 'vue'
 import { useData } from '../composables/useData'
 import ClickEdit from '../components/common/ClickEdit.vue'
+import EditBlock from '../components/common/EditBlock.vue'
+import EditOnly from '../components/common/EditOnly.vue'
 
 const { data, arrayOp } = useData()
 const companies = computed(() => data.value.jobs?.companies || [])
