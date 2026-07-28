@@ -7,10 +7,13 @@
       <div class="manifesto-inner">
         <div class="manifesto-text">
           <p v-for="(line, i) in data.manifesto" :key="i" class="manifesto-line reveal">{{ line }}</p>
-          <div class="manifesto-cta">
-            <a :href="'mailto:' + emailLink" class="cta-btn cta-btn--primary">✉ 发邮件</a>
-            <a :href="ghLink" target="_blank" rel="noopener" class="cta-btn cta-btn--ghost">⌘ GitHub</a>
-            <span v-if="phone" class="cta-phone">{{ phone }}</span>
+          <div class="manifesto-window reveal">
+            <div class="window-outer">
+              <div class="window-inner">
+                <div class="window-garden" aria-hidden="true"></div>
+                <p class="window-quote">以财务的严谨，做产品的心跳。</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -184,18 +187,56 @@ onMounted(() => {
 .manifesto-line:first-child { color: var(--accent); }
 .manifesto-line:last-child  { font-size: 22px; font-weight: 700; }
 
-.manifesto-cta { display: flex; align-items: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
-.cta-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 10px 22px; border-radius: 999px;
-  font-size: 14px; font-weight: 700; text-decoration: none;
-  transition: all 0.25s ease;
+/* ============ 古色木粉边窗 ============ */
+.manifesto-window {
+  display: flex; justify-content: flex-start;
+  margin-top: 28px;
 }
-.cta-btn--primary { background: var(--primary); color: #fff; box-shadow: var(--glow-primary); }
-.cta-btn--primary:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(67,97,238,0.45); }
-.cta-btn--ghost   { background: rgba(255,255,255,0.08); color: #c8cde0; border: 1px solid rgba(255,255,255,0.18); }
-.cta-btn--ghost:hover   { background: rgba(255,255,255,0.15); color: #fff; transform: translateY(-3px); }
-.cta-phone { font-size: 13px; color: #7a82a0; letter-spacing: 0.5px; }
+.window-outer {
+  position: relative;
+  max-width: 460px; width: 100%;
+  padding: 14px;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #8b6f47 0%, #a68a64 40%, #c4a882 100%);
+  box-shadow:
+    inset 2px 2px 6px rgba(255,255,255,0.22),
+    inset -2px -2px 6px rgba(60,40,20,0.35),
+    0 14px 34px rgba(60,40,20,0.22);
+}
+.window-outer::before {
+  content: '';
+  position: absolute; inset: 7px;
+  border-radius: 20px;
+  border: 1px dashed rgba(232,180,184,0.55);
+  pointer-events: none;
+}
+.window-inner {
+  position: relative;
+  min-height: 118px;
+  border-radius: 14px;
+  border: 2px solid rgba(232,180,184,0.75);
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 28px;
+}
+.window-garden {
+  position: absolute; inset: 0;
+  background: url('/job-portal/garden-pattern.svg') center / cover no-repeat;
+  opacity: 0.72;
+  pointer-events: none;
+}
+.window-quote {
+  position: relative; z-index: 1;
+  margin: 0;
+  font-size: 18px; font-weight: 700;
+  color: #2f4a34;
+  text-align: center; line-height: 1.55;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+}
 
 /* ============ CAPABILITY ROW (bento + radar side) ============ */
 .cap-row {
@@ -280,7 +321,7 @@ onMounted(() => {
 @media (max-width: 900px) {
   .manifesto-inner { text-align: center; padding: 36px 24px; }
   .manifesto-line { font-size: 21px; }
-  .manifesto-cta { justify-content: center; }
+  .manifesto-window { justify-content: center; }
   .cap-row { grid-template-columns: 1fr; }
   .story-body { grid-template-columns: 1fr; }
 }
