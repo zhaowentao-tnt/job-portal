@@ -476,6 +476,23 @@
       ],
       "links": { "job": "https://campus.jd.com/#/myDeliver?type=present" },
       "note": "已投递。我的投递页：https://campus.jd.com/#/myDeliver?type=present"
+    },
+    {
+      "id": "app_029",
+      "company": "拼多多集团-PDD",
+      "position": "2027届校招提前批·管培生",
+      "department": "运营管培生（上海）一志愿 / 市场管培生（上海）二志愿",
+      "location": "上海",
+      "channel": "官网",
+      "applyDate": "2026-07-29",
+      "currentStatus": "written_test",
+      "priority": "high",
+      "statusHistory": [
+        { "status": "submitted", "date": "2026-07-29", "note": "已投递 · 一志愿运营管培生（上海）、二志愿市场管培生（上海）" },
+        { "status": "written_test", "date": "2026-07-29", "note": "有笔试" }
+      ],
+      "links": {},
+      "note": "2027届校招提前批 · 一志愿运营管培生（上海）、二志愿市场管培生（上海） · 已笔试"
     }
   ]
 }
