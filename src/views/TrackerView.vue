@@ -102,20 +102,18 @@
               <EditOnly><button class="btn-del-sm" @click="removeHistory(app, si)" title="删除节点">×</button></EditOnly>
             </div>
 
-            <EditOnly>
-              <button v-if="addingHistoryAppId !== app.id" class="btn-add-history" @click="openHistoryForm(app)">+ 添加标签</button>
-              <div v-else class="history-form">
-                <select v-model="addingHistoryStatus" class="history-form-select">
-                  <option value="">选择标签</option>
-                  <option v-for="opt in statusOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
-                  <option value="__custom__">自定义标签...</option>
-                </select>
-                <input v-if="addingHistoryStatus === '__custom__'" v-model="addingHistoryCustom" type="text" class="history-form-input" placeholder="输入标签名" />
-                <input v-model="addingHistoryDate" type="date" class="history-form-input history-form-date" />
-                <button class="history-form-confirm" @click="confirmAddHistory(app)">确认</button>
-                <button class="history-form-cancel" @click="cancelAddHistory">取消</button>
-              </div>
-            </EditOnly>
+            <button v-if="addingHistoryAppId !== app.id" class="btn-add-history" @click="openHistoryForm(app)">+ 添加标签</button>
+            <div v-else class="history-form">
+              <select v-model="addingHistoryStatus" class="history-form-select">
+                <option value="">选择标签</option>
+                <option v-for="opt in statusOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
+                <option value="__custom__">自定义标签...</option>
+              </select>
+              <input v-if="addingHistoryStatus === '__custom__'" v-model="addingHistoryCustom" type="text" class="history-form-input" placeholder="输入标签名" />
+              <input v-model="addingHistoryDate" type="date" class="history-form-input history-form-date" />
+              <button class="history-form-confirm" @click="confirmAddHistory(app)">确认</button>
+              <button class="history-form-cancel" @click="cancelAddHistory">取消</button>
+            </div>
           </div>
         </div>
       </div>
