@@ -3,8 +3,8 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 import fs from 'node:fs'
 
-// 7 个数据模块（与管理面板一致）
-const DATA_MODULES = ['profile', 'experiences', 'portfolio', 'growth', 'life', 'applications', 'jobs']
+// 8 个数据模块（与 useData.js 一致）
+const DATA_MODULES = ['profile', 'experiences', 'portfolio', 'growth', 'life', 'applications', 'jobs', 'interviews']
 
 // 开发期中间件：把管理面板的“保存”直接写回 public/data/*.json 文件
 // 这样修改会真正落盘，git push 后即可部署；生产环境为纯静态，不需要此接口

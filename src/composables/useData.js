@@ -37,10 +37,18 @@ async function loadAll() {
   loaded.value = true
 }
 
-// 保存单个模块到 localStorage + 更新响应式数据
+// 保存单个模块：写 localStorage + 更新响应式 + 尝试远程写 JSON（dev）
 function saveModule(name, newData) {
   localStorage.setItem(LS_PREFIX + name, JSON.stringify(newData))
   data.value = { ...data.value, [name]: newData }
+  // dev 模式下 Vite 中间件会把数据写回 public/data/*.json；prod 静默失败
+  try {
+    fetch(`/api/save/${name}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newData)
+    }).catch(() => {})
+  } catch (_) { /* ignore */ }
 }
 
 // 重置单个模块（清除 localStorage，重新从 JSON 加载）
@@ -59,6 +67,45 @@ async function resetAll() {
 // 检查模块是否有本地修改
 function hasLocalChanges(name) {
   return localStorage.getItem(LS_PREFIX + name) !== null
+}
+
+// 原子更新单个字段：按 keyPath（点号分隔）定位并修改整个模块
+// e.g. updateField('applications', 'applications.0.currentStatus', 'offer')
+function updateField(module, keyPath, value) {
+  const root = data.value[module]
+  if (root == null) return
+  const keys = String(keyPath).split('.').filter(Boolean)
+  if (!keys.length) return
+  let target = root
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (target == null) return
+    target = target[keys[i]]
+  }
+  if (target == null) return
+  target[keys[keys.length - 1]] = value
+  // 深拷贝避免引用污染（saveModule 内已 clone；这里直接传 root 即可）
+  saveModule(module, JSON.parse(JSON.stringify(root)))
+}
+
+// 数组便捷操作（在指定路径下增/删/插入一项）
+function arrayOp(module, keyPath, op, value, index) {
+  const root = data.value[module]
+  if (root == null) return
+  const keys = String(keyPath).split('.').filter(Boolean)
+  let target = root
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (target == null) return
+    target = target[keys[i]]
+  }
+  if (!Array.isArray(target)) return
+  if (op === 'push') {
+    target.push(value)
+  } else if (op === 'remove') {
+    if (typeof index === 'number') target.splice(index, 1)
+  } else if (op === 'insert') {
+    target.splice(typeof index === 'number' ? index : target.length, 0, value)
+  }
+  saveModule(module, JSON.parse(JSON.stringify(root)))
 }
 
 // 导出单个模块为 JSON 文件
@@ -90,6 +137,8 @@ export function useData() {
     resetModule,
     resetAll,
     hasLocalChanges,
+    updateField,
+    arrayOp,
     exportModule,
     exportAll
   }

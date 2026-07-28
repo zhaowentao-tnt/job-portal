@@ -16,11 +16,6 @@ const routes = [
     path: '/jobs',
     name: 'jobs',
     component: () => import('../views/JobsView.vue')
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    component: () => import('../views/AdminView.vue')
   }
 ]
 

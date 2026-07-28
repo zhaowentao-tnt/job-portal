@@ -15,68 +15,109 @@
       </button>
     </div>
 
-    <!-- 投递记录 -->
+    <!-- ============ 投递记录 ============ -->
     <div v-show="activeBlock === 'apps'">
+      <!-- KPI 卡片（可点击筛选） -->
       <div class="stats-grid">
-        <div class="card stat-card">
+        <button class="card stat-card stat-btn" :class="{ 'stat-btn--active': currentFilter === 'all' }" @click="currentFilter = 'all'">
           <div class="stat-num">{{ stats.total }}</div>
           <div class="stat-label">总公司数</div>
-        </div>
-        <div class="card stat-card">
+        </button>
+        <button class="card stat-card stat-btn" :class="{ 'stat-btn--active': currentFilter === 'inProgress' }" @click="currentFilter = 'inProgress'">
           <div class="stat-num" style="color: var(--primary);">{{ stats.inProgress }}</div>
           <div class="stat-label">进行中</div>
-        </div>
-        <div class="card stat-card">
+        </button>
+        <button class="card stat-card stat-btn" :class="{ 'stat-btn--active': currentFilter === 'rejected' }" @click="currentFilter = 'rejected'">
           <div class="stat-num" style="color: var(--text-light);">{{ stats.rejected }}</div>
           <div class="stat-label">官网未通过</div>
-        </div>
-        <div class="card stat-card">
+        </button>
+        <button class="card stat-card stat-btn" :class="{ 'stat-btn--active': currentFilter === 'notApplied' }" @click="currentFilter = 'notApplied'">
           <div class="stat-num" style="color: var(--success);">{{ stats.notApplied }}</div>
           <div class="stat-label">待行动</div>
-        </div>
+        </button>
       </div>
 
+      <!-- 新增投递按钮 -->
+      <div class="toolbar">
+        <button class="btn btn--primary btn-sm" @click="addApp">+ 新增投递</button>
+        <span class="toolbar-hint">当前显示 {{ filteredApps.length }} 条 · 默认只看「进行中」</span>
+      </div>
+
+      <!-- 投递列表 -->
       <div class="app-list">
-        <div v-for="app in sortedApps" :key="app.id" class="card app-card">
+        <div v-for="(app, idx) in filteredApps" :key="app.id" class="card app-card">
           <div class="app-header">
             <div class="app-info">
-              <h3 class="app-company">{{ app.company }}</h3>
-              <p class="app-position">{{ app.position }}<span v-if="app.department"> · {{ app.department }}</span></p>
+              <h3 class="app-company">
+                <ClickEdit :value="app.company" module="applications" :path="`applications.${realIdx(app)}.company`" placeholder="公司名" />
+              </h3>
+              <p class="app-position">
+                <ClickEdit :value="app.position" module="applications" :path="`applications.${realIdx(app)}.position`" placeholder="岗位" />
+                <span class="app-dept"> ·
+                  <ClickEdit :value="app.department" module="applications" :path="`applications.${realIdx(app)}.department`" placeholder="部门（可空）" />
+                </span>
+              </p>
             </div>
             <div class="app-status">
-              <span class="status-badge" :style="getStatusStyle(app.currentStatus)">
-                {{ getStatusLabel(app.currentStatus) }}
-              </span>
+              <ClickEdit
+                :value="app.currentStatus"
+                type="select"
+                :options="statusOptions"
+                module="applications"
+                :path="`applications.${realIdx(app)}.currentStatus`"
+                :display="getStatusLabel(app.currentStatus)"
+              >
+                <template #display>
+                  <span class="status-badge" :style="getStatusStyle(app.currentStatus)">
+                    {{ getStatusLabel(app.currentStatus) }}
+                  </span>
+                </template>
+              </ClickEdit>
+              <button class="btn-del" @click="removeApp(app.id)" title="删除此投递">×</button>
             </div>
           </div>
+
           <div class="app-meta">
-            <span v-if="app.location">📍 {{ app.location }}</span>
-            <span v-if="app.applyDate">📅 {{ app.applyDate }}</span>
-            <span v-if="app.channel">🔗 {{ app.channel }}</span>
-            <span v-if="app.priority === 'high'" class="priority-high">⭐ 高优先级</span>
+            <span>📍 <ClickEdit :value="app.location" module="applications" :path="`applications.${realIdx(app)}.location`" placeholder="地点" /></span>
+            <span>📅 <ClickEdit :value="app.applyDate" type="date" module="applications" :path="`applications.${realIdx(app)}.applyDate`" placeholder="申请日期" /></span>
+            <span>🔗 <ClickEdit :value="app.channel" module="applications" :path="`applications.${realIdx(app)}.channel`" placeholder="投递渠道" /></span>
+            <button class="priority-toggle" :class="{ 'priority-toggle--on': app.priority === 'high' }" @click="togglePriority(app)" :title="app.priority === 'high' ? '取消高优先级' : '设为高优先级'">
+              {{ app.priority === 'high' ? '⭐ 高优先级' : '☆ 普通' }}
+            </button>
           </div>
 
-          <div v-if="app.statusHistory && app.statusHistory.length" class="app-timeline">
-            <div v-for="(sh, i) in app.statusHistory" :key="i" class="app-timeline-item">
+          <div class="app-timeline">
+            <div v-for="(sh, si) in (app.statusHistory || [])" :key="si" class="app-timeline-item">
               <span class="status-dot" :style="{ background: getStatusColor(sh.status) }"></span>
-              <span class="app-timeline-label">{{ getStatusLabel(sh.status) }}</span>
-              <span class="app-timeline-date">{{ sh.date }}</span>
-              <span v-if="sh.note" class="app-timeline-note">{{ sh.note }}</span>
+              <span class="app-timeline-label">
+                <ClickEdit :value="sh.status" type="select" :options="statusOptions" module="applications" :path="`applications.${realIdx(app)}.statusHistory.${si}.status`" :display="getStatusLabel(sh.status)" />
+              </span>
+              <span class="app-timeline-date">
+                <ClickEdit :value="sh.date" type="date" module="applications" :path="`applications.${realIdx(app)}.statusHistory.${si}.date`" placeholder="日期" />
+              </span>
+              <span class="app-timeline-note">
+                <ClickEdit :value="sh.note" module="applications" :path="`applications.${realIdx(app)}.statusHistory.${si}.note`" placeholder="备注（可空）" />
+              </span>
+              <button class="btn-del-sm" @click="removeHistory(app, si)" title="删除节点">×</button>
             </div>
+            <button class="btn-add-history" @click="addHistory(app)">+ 添加状态节点</button>
           </div>
 
-          <p v-if="app.note" class="app-note">{{ app.note }}</p>
+          <p class="app-note" v-if="hasNote(app) || alwaysShowNote">
+            <span class="note-label">📝</span>
+            <ClickEdit :value="app.note" module="applications" :path="`applications.${realIdx(app)}.note`" placeholder="备注（可空）" />
+          </p>
         </div>
       </div>
 
-      <div v-if="!sortedApps.length" class="empty-state">
+      <div v-if="!filteredApps.length" class="empty-state">
         <div class="empty-state-icon">📭</div>
         <p>暂无投递记录</p>
-        <p style="font-size: 13px; margin-top: 8px;">请在管理面板中添加投递信息</p>
+        <p style="font-size: 13px; margin-top: 8px;">点击右上角「+ 新增投递」开始</p>
       </div>
     </div>
 
-    <!-- 面试记录 -->
+    <!-- ============ 面试记录 ============ -->
     <div v-show="activeBlock === 'interviews'">
       <div class="stats-grid iv-stats">
         <div class="card stat-card">
@@ -97,28 +138,57 @@
         </div>
       </div>
 
+      <div class="toolbar">
+        <button class="btn btn--primary btn-sm" @click="addInterview">+ 新增面试复盘</button>
+        <span class="toolbar-hint">共 {{ interviews.length }} 场</span>
+      </div>
+
       <div class="iv-list">
-        <div v-for="iv in sortedInterviews" :key="iv.id" class="card iv-card">
+        <div v-for="(iv, idx) in sortedInterviews" :key="iv.id" class="card iv-card">
           <div class="iv-header">
             <div class="iv-info">
-              <h3 class="iv-company">{{ iv.company }}</h3>
-              <p class="iv-position">{{ iv.position }}</p>
+              <h3 class="iv-company">
+                <ClickEdit :value="iv.company" module="interviews" :path="`interviews.${ivIdx(iv)}.company`" placeholder="公司名" />
+              </h3>
+              <p class="iv-position">
+                <ClickEdit :value="iv.position" module="interviews" :path="`interviews.${ivIdx(iv)}.position`" placeholder="岗位" />
+              </p>
             </div>
-            <span class="iv-status" :class="'iv-status--' + iv.status">
-              {{ iv.status === 'completed' ? '已完成' : '待进行' }}
-            </span>
+            <div class="iv-status-wrap">
+              <ClickEdit
+                :value="iv.status"
+                type="select"
+                :options="[{value:'completed',label:'已完成'},{value:'upcoming',label:'待进行'}]"
+                module="interviews"
+                :path="`interviews.${ivIdx(iv)}.status`"
+                :display="iv.status === 'completed' ? '已完成' : '待进行'"
+              >
+                <template #display>
+                  <span class="iv-status" :class="`iv-status--${iv.status}`">
+                    {{ iv.status === 'completed' ? '已完成' : '待进行' }}
+                  </span>
+                </template>
+              </ClickEdit>
+              <button class="btn-del" @click="removeInterview(iv.id)" title="删除此面试">×</button>
+            </div>
           </div>
+
           <div class="iv-meta">
-            <span v-if="iv.interviewTime">🕒 {{ iv.interviewTime }}</span>
-            <span v-if="iv.interviewType">🎥 {{ iv.interviewType }}</span>
+            <span>🕒 <ClickEdit :value="iv.interviewTime" module="interviews" :path="`interviews.${ivIdx(iv)}.interviewTime`" placeholder="时间（如 2026-07-27 09:30）" /></span>
+            <span>🎥 <ClickEdit :value="iv.interviewType" type="select" :options="ivTypeOptions" module="interviews" :path="`interviews.${ivIdx(iv)}.interviewType`" placeholder="面试形式" /></span>
           </div>
 
-          <p v-if="iv.review" class="iv-review">{{ iv.review }}</p>
+          <p class="iv-review">
+            <ClickEdit :value="iv.review" type="longtext" module="interviews" :path="`interviews.${ivIdx(iv)}.review`" placeholder="整体复盘（可选）" />
+          </p>
 
-          <div v-if="iv.insights && iv.insights.length" class="iv-insights">
+          <div class="iv-insights">
             <template v-for="group in insightGroups(iv.insights)" :key="group.label">
               <div v-if="group.items.length" class="iv-insights-group">
-                <div class="iv-insights-title" :class="group.cls">{{ group.title }}</div>
+                <div class="iv-insights-title-row">
+                  <div class="iv-insights-title" :class="group.cls">{{ group.title }}</div>
+                  <button class="btn-add-sm" @click="addInsight(iv, group.label)">+ 添加</button>
+                </div>
                 <div
                   v-for="(ins, i) in group.items"
                   :key="i"
@@ -127,14 +197,21 @@
                 >
                   <div class="iv-insight-head">
                     <span class="iv-insight-index">{{ i + 1 }}</span>
-                    <span class="iv-insight-title">{{ ins.title }}</span>
-                    <span v-if="ins.key" class="iv-key-tag">重点</span>
+                    <span class="iv-insight-title">
+                      <ClickEdit :value="ins.title" module="interviews" :path="`interviews.${ivIdx(iv)}.insights.${insGlobalIdx(iv, group.label, i)}.title`" placeholder="要点标题" />
+                    </span>
+                    <button class="key-toggle" :class="{ 'key-toggle--on': ins.key }" @click="toggleInsightKey(iv, group.label, i)" :title="ins.key ? '取消重点' : '标记为重点'">
+                      {{ ins.key ? '★ 重点' : '☆ 标记重点' }}
+                    </button>
+                    <button class="btn-del-sm" @click="removeInsight(iv, group.label, i)" title="删除此条">×</button>
                   </div>
-                  <p v-if="ins.content" class="iv-insight-content">{{ ins.content }}</p>
-                  <template v-if="ins.phenomenon || ins.risk || ins.improvement">
-                    <div v-if="ins.phenomenon" class="iv-sub"><span class="iv-sub-label">现象</span><span class="iv-sub-body">{{ ins.phenomenon }}</span></div>
-                    <div v-if="ins.risk" class="iv-sub"><span class="iv-sub-label iv-sub-label--risk">风险</span><span class="iv-sub-body">{{ ins.risk }}</span></div>
-                    <div v-if="ins.improvement" class="iv-sub"><span class="iv-sub-label iv-sub-label--fix">改进</span><span class="iv-sub-body">{{ ins.improvement }}</span></div>
+                  <p class="iv-insight-content">
+                    <ClickEdit :value="ins.content" type="longtext" module="interviews" :path="`interviews.${ivIdx(iv)}.insights.${insGlobalIdx(iv, group.label, i)}.content`" placeholder="内容（可空；或用下方「现象/风险/改进」分段填）" />
+                  </p>
+                  <template v-if="ins.phenomenon || ins.risk || ins.improvement || true">
+                    <div class="iv-sub"><span class="iv-sub-label">现象</span><span class="iv-sub-body"><ClickEdit :value="ins.phenomenon" module="interviews" :path="`interviews.${ivIdx(iv)}.insights.${insGlobalIdx(iv, group.label, i)}.phenomenon`" placeholder="具体发生了什么" /></span></div>
+                    <div class="iv-sub"><span class="iv-sub-label iv-sub-label--risk">风险</span><span class="iv-sub-body"><ClickEdit :value="ins.risk" module="interviews" :path="`interviews.${ivIdx(iv)}.insights.${insGlobalIdx(iv, group.label, i)}.risk`" placeholder="如果不改会怎样" /></span></div>
+                    <div class="iv-sub"><span class="iv-sub-label iv-sub-label--fix">改进</span><span class="iv-sub-body"><ClickEdit :value="ins.improvement" module="interviews" :path="`interviews.${ivIdx(iv)}.insights.${insGlobalIdx(iv, group.label, i)}.improvement`" placeholder="下一步怎么做" /></span></div>
                   </template>
                 </div>
               </div>
@@ -146,7 +223,7 @@
       <div v-if="!interviews.length" class="empty-state">
         <div class="empty-state-icon">🎤</div>
         <p>暂无面试记录</p>
-        <p style="font-size: 13px; margin-top: 8px;">可在管理面板「面试记录」中添加</p>
+        <p style="font-size: 13px; margin-top: 8px;">点击「+ 新增面试复盘」开始</p>
       </div>
     </div>
   </div>
@@ -155,8 +232,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useData } from '../composables/useData'
+import ClickEdit from '../components/common/ClickEdit.vue'
 
-const { data } = useData()
+const { data, updateField, arrayOp } = useData()
 
 const activeBlock = ref('apps')
 
@@ -166,12 +244,22 @@ const statusConfig = computed(() => data.value.applications?.statusConfig || {})
 const interviews = computed(() => data.value.interviews?.interviews || [])
 const interviewsLastUpdated = computed(() => data.value.interviews?.lastUpdated || '')
 
-const sortedApps = computed(() => {
-  return [...apps.value].sort((a, b) => {
+const currentFilter = ref('inProgress') // 默认只看进行中
+
+const IN_PROGRESS = ['submitted', 'processing', 'written_test', 'interview_1', 'interview_2', 'interview_3', 'offer']
+
+const filteredApps = computed(() => {
+  const list = [...apps.value]
+  list.sort((a, b) => {
     if (a.priority === 'high' && b.priority !== 'high') return -1
     if (b.priority === 'high' && a.priority !== 'high') return 1
     return (b.applyDate || '').localeCompare(a.applyDate || '')
   })
+  if (currentFilter.value === 'all') return list
+  if (currentFilter.value === 'inProgress') return list.filter(a => IN_PROGRESS.includes(a.currentStatus))
+  if (currentFilter.value === 'rejected') return list.filter(a => a.currentStatus === 'rejected')
+  if (currentFilter.value === 'notApplied') return list.filter(a => a.currentStatus === 'not_applied' || a.currentStatus === 'withdrawn')
+  return list
 })
 
 const sortedInterviews = computed(() => {
@@ -182,7 +270,7 @@ const stats = computed(() => {
   const all = apps.value
   return {
     total: all.length,
-    inProgress: all.filter(a => ['submitted', 'written_test', 'interview_1', 'interview_2', 'interview_3', 'processing'].includes(a.currentStatus)).length,
+    inProgress: all.filter(a => IN_PROGRESS.includes(a.currentStatus)).length,
     rejected: all.filter(a => a.currentStatus === 'rejected').length,
     notApplied: all.filter(a => a.currentStatus === 'not_applied').length
   }
@@ -198,22 +286,48 @@ const ivStats = computed(() => {
   }
 })
 
+const statusOptions = computed(() => Object.entries(statusConfig.value).map(([k, v]) => ({ value: k, label: v.label })))
+const ivTypeOptions = [
+  { value: '视频', label: '视频' },
+  { value: '电话', label: '电话' },
+  { value: '现场', label: '现场' },
+  { value: 'AI 面试', label: 'AI 面试' }
+]
+
+function realIdx(app) {
+  return apps.value.findIndex(a => a.id === app.id)
+}
+function ivIdx(iv) {
+  return interviews.value.findIndex(a => a.id === iv.id)
+}
+
+function hasNote(app) {
+  return app.note && app.note.length > 0
+}
+const alwaysShowNote = false // 改 true 即可始终显示可点击
+
 function insightGroups(list) {
+  const all = list || []
   return [
-    { label: 'strength', title: '✅ 优点', cls: 'iv-insights-title--strength', items: list.filter(x => x.category === 'strength') },
-    { label: 'weakness', title: '⚠️ 待改进', cls: 'iv-insights-title--weakness', items: list.filter(x => x.category === 'weakness') },
-    { label: 'other', title: '💡 面试思考', cls: '', items: list.filter(x => !x.category) }
+    { label: 'strength', title: '✅ 优点', cls: 'iv-insights-title--strength', items: all.filter(x => x.category === 'strength') },
+    { label: 'weakness', title: '⚠️ 待改进', cls: 'iv-insights-title--weakness', items: all.filter(x => x.category === 'weakness') },
+    { label: 'other', title: '💡 面试思考', cls: '', items: all.filter(x => !x.category) }
   ]
+}
+
+function insGlobalIdx(iv, catLabel, iInGroup) {
+  const list = iv.insights || []
+  const filtered = catLabel === 'other' ? list.filter(x => !x.category) : list.filter(x => x.category === catLabel)
+  const item = filtered[iInGroup]
+  return list.indexOf(item)
 }
 
 function getStatusLabel(key) {
   return statusConfig.value[key]?.label || key
 }
-
 function getStatusColor(key) {
   return statusConfig.value[key]?.color || '#999'
 }
-
 function getStatusStyle(key) {
   const color = getStatusColor(key)
   return {
@@ -221,6 +335,93 @@ function getStatusStyle(key) {
     color: color,
     border: `1px solid ${color}40`
   }
+}
+
+// === 投递记录 CRUD ===
+function addApp() {
+  const id = 'app_' + Date.now().toString(36)
+  const today = new Date().toISOString().slice(0, 10)
+  const newApp = {
+    id,
+    company: '新公司',
+    position: '岗位',
+    department: '',
+    location: '',
+    channel: '',
+    applyDate: today,
+    currentStatus: 'submitted',
+    priority: '',
+    statusHistory: [{ status: 'submitted', date: today, note: '' }],
+    links: {},
+    note: ''
+  }
+  arrayOp('applications', 'applications', 'push', newApp)
+}
+function removeApp(id) {
+  if (!confirm('确定删除此投递？')) return
+  const idx = apps.value.findIndex(a => a.id === id)
+  if (idx >= 0) arrayOp('applications', 'applications', 'remove', null, idx)
+}
+function togglePriority(app) {
+  const idx = realIdx(app)
+  updateField('applications', `applications.${idx}.priority`, app.priority === 'high' ? '' : 'high')
+}
+function addHistory(app) {
+  const idx = realIdx(app)
+  const today = new Date().toISOString().slice(0, 10)
+  const next = { status: app.currentStatus, date: today, note: '' }
+  arrayOp('applications', `applications.${idx}.statusHistory`, 'push', next)
+}
+function removeHistory(app, si) {
+  const idx = realIdx(app)
+  arrayOp('applications', `applications.${idx}.statusHistory`, 'remove', null, si)
+}
+
+// === 面试复盘 CRUD ===
+function addInterview() {
+  const id = 'iv_' + Date.now().toString(36)
+  const today = new Date().toISOString().slice(0, 10)
+  arrayOp('interviews', 'interviews', 'push', {
+    id,
+    company: '新公司',
+    position: '岗位',
+    interviewType: '视频',
+    interviewTime: `${today} 09:00`,
+    status: 'upcoming',
+    review: '',
+    insights: []
+  })
+}
+function removeInterview(id) {
+  if (!confirm('确定删除此面试记录？')) return
+  const idx = interviews.value.findIndex(a => a.id === id)
+  if (idx >= 0) arrayOp('interviews', 'interviews', 'remove', null, idx)
+}
+function addInsight(iv, catLabel) {
+  const idx = ivIdx(iv)
+  const category = catLabel === 'other' ? undefined : catLabel
+  arrayOp('interviews', `interviews.${idx}.insights`, 'push', {
+    category,
+    title: '新要点',
+    key: false,
+    content: '',
+    phenomenon: '',
+    risk: '',
+    improvement: ''
+  })
+}
+function removeInsight(iv, catLabel, iInGroup) {
+  const gi = insGlobalIdx(iv, catLabel, iInGroup)
+  if (gi < 0) return
+  if (!confirm('确定删除此条？')) return
+  const idx = ivIdx(iv)
+  arrayOp('interviews', `interviews.${idx}.insights`, 'remove', null, gi)
+}
+function toggleInsightKey(iv, catLabel, iInGroup) {
+  const gi = insGlobalIdx(iv, catLabel, iInGroup)
+  const idx = ivIdx(iv)
+  const cur = iv.insights?.[gi]?.key || false
+  updateField('interviews', `interviews.${idx}.insights.${gi}.key`, !cur)
 }
 </script>
 
@@ -288,16 +489,45 @@ function getStatusStyle(key) {
   color: var(--text-light);
 }
 
+/* Toolbar */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.toolbar-hint {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
 /* Stats */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 .stat-card {
   text-align: center;
   padding: 20px;
+}
+.stat-btn {
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s;
+}
+.stat-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+}
+.stat-btn--active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.18);
+  background: rgba(67, 97, 238, 0.04);
 }
 .stat-num {
   font-size: 32px;
@@ -317,22 +547,35 @@ function getStatusStyle(key) {
   flex-direction: column;
   gap: 12px;
 }
-.app-card { padding: 20px; }
+.app-card {
+  padding: 20px;
+  position: relative;
+}
 .app-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 12px;
+  gap: 12px;
 }
+.app-info { flex: 1; min-width: 0; }
 .app-company {
   font-size: 17px;
   font-weight: 700;
   color: var(--text);
+  margin: 0 0 4px;
 }
 .app-position {
   font-size: 14px;
   color: var(--text-sub);
-  margin-top: 2px;
+  margin: 0;
+}
+.app-dept { color: var(--text-light); }
+.app-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 .status-badge {
   display: inline-block;
@@ -340,7 +583,31 @@ function getStatusStyle(key) {
   border-radius: var(--radius-full);
   font-size: 13px;
   font-weight: 600;
+  white-space: nowrap;
+  cursor: text;
 }
+.btn-del,
+.btn-del-sm {
+  border: 1px solid var(--border-light);
+  background: var(--card-bg);
+  color: var(--text-light);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s;
+}
+.btn-del-sm { width: 20px; height: 20px; font-size: 12px; }
+.btn-del:hover,
+.btn-del-sm:hover {
+  background: var(--danger);
+  color: #fff;
+  border-color: var(--danger);
+}
+
 .app-meta {
   display: flex;
   flex-wrap: wrap;
@@ -348,35 +615,72 @@ function getStatusStyle(key) {
   font-size: 13px;
   color: var(--text-light);
   margin-bottom: 12px;
+  align-items: center;
 }
-.priority-high {
+.priority-toggle {
+  background: none;
+  border: 1px dashed var(--border);
+  color: var(--text-light);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--font-family);
+  transition: all 0.15s;
+}
+.priority-toggle--on {
+  background: #fff8ec;
   color: var(--warning);
+  border-style: solid;
+  border-color: var(--warning);
   font-weight: 600;
 }
+
 .app-timeline {
   display: flex;
   flex-wrap: wrap;
-  gap: 0;
+  gap: 6px;
   padding: 12px 0;
   border-top: 1px solid var(--border-light);
+  align-items: center;
 }
 .app-timeline-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px 4px 0;
+  padding: 4px 8px;
   font-size: 13px;
   color: var(--text-sub);
-  position: relative;
+  background: var(--bg);
+  border-radius: 999px;
 }
-.app-timeline-item:not(:last-child)::after {
+.app-timeline-item:not(:last-of-type)::after {
   content: '→';
-  margin-left: 6px;
+  margin-left: 4px;
   color: var(--text-muted);
 }
 .app-timeline-label { font-weight: 500; }
 .app-timeline-date { color: var(--text-light); font-size: 12px; }
-.app-timeline-note { color: var(--text-light); font-size: 12px; }
+.app-timeline-note { color: var(--text-light); font-size: 12px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn-add-history,
+.btn-add-sm {
+  background: none;
+  border: 1px dashed var(--border);
+  color: var(--text-light);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--font-family);
+  transition: all 0.15s;
+}
+.btn-add-history:hover,
+.btn-add-sm:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  border-style: solid;
+}
+
 .app-note {
   margin-top: 8px;
   font-size: 13px;
@@ -384,7 +688,11 @@ function getStatusStyle(key) {
   padding: 8px 12px;
   background: var(--bg);
   border-radius: var(--radius-sm);
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
 }
+.note-label { color: var(--text-light); }
 
 /* Interview cards */
 .iv-list {
@@ -398,22 +706,33 @@ function getStatusStyle(key) {
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 12px;
+  gap: 12px;
 }
+.iv-info { flex: 1; min-width: 0; }
 .iv-company {
   font-size: 18px;
   font-weight: 700;
   color: var(--text);
+  margin: 0 0 4px;
 }
 .iv-position {
   font-size: 14px;
   color: var(--text-sub);
-  margin-top: 2px;
+  margin: 0;
+}
+.iv-status-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 .iv-status {
   font-size: 13px;
   font-weight: 600;
   padding: 4px 12px;
   border-radius: var(--radius-full);
+  display: inline-block;
+  cursor: text;
 }
 .iv-status--completed { background: #ecfdf5; color: #059669; }
 .iv-status--upcoming { background: #fffbeb; color: #d97706; }
@@ -432,13 +751,18 @@ function getStatusStyle(key) {
   padding: 12px 14px;
   background: var(--bg);
   border-radius: var(--radius-sm);
-  margin-bottom: 16px;
+  margin: 0 0 16px;
+}
+.iv-insights-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 .iv-insights-title {
   font-size: 14px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 12px;
 }
 .iv-insights-title--strength { color: #059669; }
 .iv-insights-title--weakness { color: #d97706; }
@@ -450,6 +774,7 @@ function getStatusStyle(key) {
   line-height: 1.65;
   color: var(--text-sub);
   margin-top: 6px;
+  align-items: flex-start;
 }
 .iv-sub-label {
   flex-shrink: 0;
@@ -481,6 +806,7 @@ function getStatusStyle(key) {
   align-items: center;
   gap: 8px;
   margin-bottom: 6px;
+  flex-wrap: wrap;
 }
 .iv-insight-index {
   display: inline-flex;
@@ -499,15 +825,26 @@ function getStatusStyle(key) {
   font-size: 15px;
   font-weight: 700;
   color: var(--text);
+  flex: 1;
+  min-width: 0;
 }
-.iv-key-tag {
-  margin-left: auto;
-  font-size: 11px;
-  font-weight: 700;
-  color: #d97706;
-  background: #fef3c7;
+.key-toggle {
+  background: none;
+  border: 1px dashed var(--border);
+  color: var(--text-light);
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 11px;
+  font-family: var(--font-family);
+  transition: all 0.15s;
+}
+.key-toggle--on {
+  background: #fff8ec;
+  color: var(--warning);
+  border-style: solid;
+  border-color: var(--warning);
+  font-weight: 600;
 }
 .iv-insight-content {
   font-size: 14px;
