@@ -13,12 +13,6 @@
             <span v-if="phone" class="cta-phone">{{ phone }}</span>
           </div>
         </div>
-        <div class="manifesto-avatar reveal">
-          <div class="avatar-glow-ring">
-            <img v-if="data.avatarPath" :src="'/job-portal/' + data.avatarPath" class="avatar-img" alt="头像" />
-            <div v-else class="avatar-letter">{{ initial }}</div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -178,7 +172,6 @@ onMounted(() => {
 
 .manifesto-inner {
   position: relative; z-index: 1;
-  display: flex; align-items: center; gap: 40px;
   padding: 48px 44px;
 }
 .manifesto-text { flex: 1; }
@@ -203,23 +196,6 @@ onMounted(() => {
 .cta-btn--ghost   { background: rgba(255,255,255,0.08); color: #c8cde0; border: 1px solid rgba(255,255,255,0.18); }
 .cta-btn--ghost:hover   { background: rgba(255,255,255,0.15); color: #fff; transform: translateY(-3px); }
 .cta-phone { font-size: 13px; color: #7a82a0; letter-spacing: 0.5px; }
-
-.manifesto-avatar { flex-shrink: 0; }
-.avatar-glow-ring {
-  width: 130px; height: 130px;
-  border-radius: 50%; padding: 4px;
-  background: conic-gradient(from 180deg, var(--accent), var(--primary), var(--accent));
-  box-shadow: 0 0 30px rgba(6,214,160,0.3), 0 10px 30px rgba(0,0,0,0.4);
-  animation: ringSpin 12s linear infinite;
-}
-@keyframes ringSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.avatar-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid rgba(15,15,30,0.8); }
-.avatar-letter {
-  width: 100%; height: 100%; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 52px; font-weight: 900; color: var(--accent);
-  background: rgba(6,214,160,0.08); border: 3px solid rgba(15,15,30,0.8);
-}
 
 /* ============ CAPABILITY ROW (bento + radar side) ============ */
 .cap-row {
@@ -302,7 +278,7 @@ onMounted(() => {
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 900px) {
-  .manifesto-inner { flex-direction: column-reverse; text-align: center; padding: 36px 24px; }
+  .manifesto-inner { text-align: center; padding: 36px 24px; }
   .manifesto-line { font-size: 21px; }
   .manifesto-cta { justify-content: center; }
   .cap-row { grid-template-columns: 1fr; }
