@@ -1,0 +1,48 @@
+{
+  "learningPaths": [
+    {
+      "name": "AI工具与前沿",
+      "color": "#4361ee",
+      "items": [
+        { "date": "2025-10", "content": "开始学习飞书妙搭低代码开发" },
+        { "date": "2025-11", "content": "搭建第一个AI应用（财务场景）" },
+        { "date": "2026-03", "content": "在极兔实习期间将代码流程封装为「一键传输」工具" },
+        { "date": "2026-06", "content": "运用「vibe coding」方式完成论文数据分析" },
+        { "date": "2026-07", "content": "使用Claude Code/WorkBuddy搭建个人品牌网站" },
+        { "date": "2026-07", "content": "学习AI图像生成提示词设计" }
+      ]
+    },
+    {
+      "name": "产品经理转型",
+      "color": "#06d6a0",
+      "items": [
+        { "date": "2025-10", "content": "阅读《人人都是产品经理》" },
+        { "date": "2026-01", "content": "开始练习Axure/Figma原型设计" },
+        { "date": "2026-03", "content": "搭建个人项目作品集" },
+        { "date": "2026-07", "content": "构建个人品牌招聘网站" }
+      ]
+    },
+    {
+      "name": "数据与实证研究",
+      "color": "#f59e0b",
+      "items": [
+        { "date": "2023-09", "content": "学习Stata计量经济学分析" },
+        { "date": "2024-03", "content": "完成首个DID模型实证分析" },
+        { "date": "2025-06", "content": "基于百万级税调数据产出三篇学术论文" },
+        { "date": "2026-06", "content": "业财融合论文定稿" }
+      ]
+    }
+  ],
+  "certificates": [
+    { "name": "国家英语六级", "date": "" },
+    { "name": "校级二等奖学金", "date": "2024" },
+    { "name": "学术先进个人", "date": "2024" },
+    { "name": "专业排名5/98（本科）", "date": "2024" },
+    { "name": "三好学生（3次）", "date": "2021-2023" },
+    { "name": "校级奖学金一等1次、二等2次", "date": "2021-2023" }
+  ],
+  "books": [
+    { "title": "人人都是产品经理", "author": "苏杰", "status": "已读" },
+    { "title": "启示录：打造用户喜爱的产品", "author": "Marty Cagan", "status": "已读" }
+  ]
+}
