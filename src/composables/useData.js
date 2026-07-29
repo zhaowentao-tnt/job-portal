@@ -9,6 +9,22 @@ const loaded = ref(false)
 
 // localStorage 前缀
 const LS_PREFIX = 'jp_data_'
+const VERSION_PREFIX = 'jp_version_'
+const CLEANUP_KEY = 'jp_cleanup_v1'
+
+// 一次性清理：如果检测到版本化代码遗留的 jp_version_* 键，
+// 清除所有 jp_* 键，强制从 JSON 文件重新加载
+function cleanupVersioningArtifacts() {
+  if (localStorage.getItem(CLEANUP_KEY)) return
+  const hasVersionKeys = Object.keys(localStorage).some(k => k.startsWith(VERSION_PREFIX))
+  if (hasVersionKeys) {
+    Object.keys(localStorage)
+      .filter(k => k.startsWith('jp_'))
+      .forEach(k => localStorage.removeItem(k))
+    console.log('[useData] Cleaned up versioning artifacts from localStorage')
+  }
+  localStorage.setItem(CLEANUP_KEY, '1')
+}
 
 // 从 JSON 文件加载单个模块
 async function fetchModule(name) {
@@ -26,6 +42,7 @@ function getLocal(name) {
 
 // 加载所有模块
 async function loadAll() {
+  cleanupVersioningArtifacts()
   const results = await Promise.all(
     MODULES.map(async (name) => {
       const fileData = await fetchModule(name).catch(() => ({}))
