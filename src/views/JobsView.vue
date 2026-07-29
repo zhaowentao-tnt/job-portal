@@ -101,7 +101,7 @@ const companies = computed(() => data.value.jobs?.companies || [])
 const filters = [
   { key: 'all', label: '全部' },
   { key: 'open', label: '招聘中' },
-  { key: 'soon', label: '即将开始' },
+  { key: 'applied', label: '已投递' },
   { key: 'closed', label: '已结束' }
 ]
 
@@ -118,13 +118,13 @@ function getCount(key) {
 }
 
 function getStatusText(status) {
-  const map = { open: '招聘中', soon: '即将开始', closed: '已结束' }
+  const map = { open: '招聘中', applied: '已投递', closed: '已结束', soon: '即将开始' }
   return map[status] || status
 }
 
 const statusOptions = [
   { value: 'open', label: '招聘中' },
-  { value: 'soon', label: '即将开始' },
+  { value: 'applied', label: '已投递' },
   { value: 'closed', label: '已结束' }
 ]
 
@@ -143,7 +143,7 @@ function addCompany() {
     deadline: '',
     requirements: [],
     url: '',
-    status: 'soon',
+    status: 'open',
     note: ''
   })
 }
@@ -169,12 +169,17 @@ function removeReq(company, ri) {
   display: flex; justify-content: space-between; align-items: flex-start;
   gap: 12px; margin-bottom: 12px;
 }
+.head-row > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
 
 .page-title {
   font-size: 28px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .page-sub {
@@ -289,6 +294,7 @@ function removeReq(company, ri) {
 }
 
 .job-status--open { background: var(--success-light, #e6faf3); color: var(--success); }
+.job-status--applied { background: var(--primary-light, #e0e7ff); color: var(--primary); }
 .job-status--soon { background: var(--warning-light, #fef3c7); color: var(--warning); }
 .job-status--closed { background: var(--border-light); color: var(--text-light); }
 
