@@ -88,12 +88,13 @@ function updateField(module, keyPath, value) {
 }
 
 // 数组便捷操作（在指定路径下增/删/插入一项）
+// keyPath 指向「目标数组本身」，如 'applications.0.statusHistory'
 function arrayOp(module, keyPath, op, value, index) {
   const root = data.value[module]
   if (root == null) return
   const keys = String(keyPath).split('.').filter(Boolean)
   let target = root
-  for (let i = 0; i < keys.length - 1; i++) {
+  for (let i = 0; i < keys.length; i++) {
     if (target == null) return
     target = target[keys[i]]
   }
