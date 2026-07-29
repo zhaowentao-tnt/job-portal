@@ -15,14 +15,6 @@
     "独挑 6 省 26 市 IPO 尽调，经手上亿条运单核算",
     "正从财务审计，转型为用数据驱动决策的产品人"
   ],
-  "stats": [
-    { "icon": "🗺️", "value": 26, "prefix": "6省", "unit": "市", "label": "IPO 尽调覆盖" },
-    { "icon": "🤝", "value": 45, "unit": "家", "label": "客户/供应商访谈" },
-    { "icon": "📦", "value": 154, "unit": "处", "label": "资产盘点" },
-    { "icon": "⚡", "value": 70, "prefix": "+", "unit": "%", "label": "核算效率提升" },
-    { "icon": "📊", "value": 1, "unit": "亿+", "label": "明细运单处理", "static": true },
-    { "icon": "📝", "value": 40, "unit": "页+", "label": "行业分析报告" }
-  ],
   "transitionStory": {
     "narrative": "从审计助理到财务BP，我始终在追问：效率还能更高吗？在容诚，我独立完成6省26市IPO尽调，访谈45家主体、盘点154处资产——但我发现，大量时间耗在重复性工作上。在极兔，我开始用Python和Power BI把手工核算改造成自动化流程，效率飙升70%。后来，我用飞书Codex从零搭建了3个AI工具，其中2个被同事日常使用。那一刻我意识到：与其核算数字，不如让数字帮人做决策——这就是我转型产品的起点。",
     "turningPoints": [
@@ -83,7 +75,6 @@
     }
   ],
   "contact": [
-    { "icon": "📧", "label": "邮箱", "value": "1462905371@qq.com", "type": "email" },
     { "icon": "📱", "label": "电话", "value": "13589138987", "type": "phone" },
     { "icon": "📍", "label": "所在地", "value": "湖北武汉" },
     { "icon": "🎓", "label": "学校", "value": "中南财经政法大学（211）" }
