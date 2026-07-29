@@ -46,7 +46,7 @@
 
       <!-- 投递列表 -->
       <div class="app-list">
-        <div v-for="(app, idx) in filteredApps" :key="app.id" class="card app-card">
+        <div v-for="(app, idx) in filteredApps" :key="app.id" class="card app-card" :class="{ 'app-card--pinned': app.pinned }">
           <div class="app-header">
             <div class="app-info">
               <h3 class="app-company">
@@ -74,7 +74,13 @@
                   </span>
                 </template>
               </ClickEdit>
-              <EditOnly><button class="btn-del" @click="removeApp(app.id)" title="删除此投递">×</button></EditOnly>
+              <span v-if="app.pinned" class="pin-flag">📌 置顶</span>
+              <EditOnly>
+                <button class="pin-toggle" :class="{ 'pin-toggle--on': app.pinned }" @click="togglePin(app)" :title="app.pinned ? '取消置顶' : '置顶此投递'">
+                  {{ app.pinned ? '📌 取消置顶' : '📍 置顶' }}
+                </button>
+                <button class="btn-del" @click="removeApp(app.id)" title="删除此投递">×</button>
+              </EditOnly>
             </div>
           </div>
 
@@ -272,8 +278,13 @@ const IN_PROGRESS = ['submitted', 'processing', 'written_test', 'interview_1', '
 const filteredApps = computed(() => {
   const list = [...apps.value]
   list.sort((a, b) => {
+    // 1. 置顶项永远在最前
+    if (a.pinned && !b.pinned) return -1
+    if (b.pinned && !a.pinned) return 1
+    // 2. 高优先级次之
     if (a.priority === 'high' && b.priority !== 'high') return -1
     if (b.priority === 'high' && a.priority !== 'high') return 1
+    // 3. 按申请日期倒序
     return (b.applyDate || '').localeCompare(a.applyDate || '')
   })
   if (currentFilter.value === 'all') return list
@@ -382,6 +393,10 @@ function removeApp(id) {
 function togglePriority(app) {
   const idx = realIdx(app)
   updateField('applications', `applications.${idx}.priority`, app.priority === 'high' ? '' : 'high')
+}
+function togglePin(app) {
+  const idx = realIdx(app)
+  updateField('applications', `applications.${idx}.pinned`, !app.pinned)
 }
 function openHistoryForm(app) {
   addingHistoryAppId.value = app.id
@@ -581,6 +596,47 @@ function toggleInsightKey(iv, catLabel, iInGroup) {
 .app-card {
   padding: 20px;
   position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f7ff 100%);
+  border: 1px solid rgba(67, 97, 238, 0.18);
+  box-shadow: 0 6px 18px rgba(30, 58, 138, 0.10), inset 4px 0 0 var(--primary);
+}
+/* 置顶卡片：更深底色 + 金色强调，形成视觉层次 */
+.app-card--pinned {
+  background: linear-gradient(180deg, #eef4ff 0%, #e1ecff 100%);
+  border-color: rgba(67, 97, 238, 0.40);
+  box-shadow: 0 8px 22px rgba(30, 58, 138, 0.16), inset 4px 0 0 var(--warning);
+}
+.pin-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--warning);
+  background: #fff8ec;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+.pin-toggle {
+  background: none;
+  border: 1px dashed var(--border);
+  color: var(--text-light);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--font-family);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.pin-toggle--on {
+  background: #eef4ff;
+  color: var(--primary);
+  border-style: solid;
+  border-color: var(--primary);
+  font-weight: 600;
 }
 .app-header {
   display: flex;
