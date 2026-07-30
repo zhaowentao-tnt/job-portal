@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-21",
+  "lastUpdated": "2026-07-30",
   "companies": [
     {
       "company": "小鹏汽车",
@@ -19,13 +19,14 @@
       "position": "2027 拓疆者 校园招聘",
       "status": "open",
       "location": "",
-      "startDate": "2026-07-07",
+      "startDate": "2026-06-25",
       "deadline": "招满即停（不设截止时间）",
       "requirements": [
-        "1个岗位"
+        "仅限投递 1 个职位（投递后无法修改）",
+        "留意邮箱/短信通知（测评错过有效期=自动放弃）"
       ],
-      "note": "7月7日开始，不设截止时间，招满即停；按照建议可于 2026-07-23 左右投递。",
-      "url": "https://careers.dji.com/zh-CN/campus"
+      "note": "简历投递 6/25 起，招满即停；初筛 7月上旬—9月中旬；测评 7月中旬起；面试 8月下旬—10月中旬；结果反馈 10月下旬—11月下旬。建议 8/1 之后投递但不要太晚；科技公司投产品岗需想清方向。",
+      "url": "https://apply.careers.dji.com/campus-recruitment/dji/143359?locale=zh-CN#/?zhineng%5B0%5D=209146&zhineng%5B1%5D=199332&zhineng%5B2%5D=211467&zhineng%5B3%5D=207001&zhineng%5B4%5D=201272&page=1&anchorName=jobsList"
     },
     {
       "company": "中兴",
@@ -45,9 +46,12 @@
       "location": "",
       "startDate": "2026-07-03",
       "deadline": "2026-08-14",
-      "requirements": [],
-      "note": "不影响秋招，建议于 2026-07-23 左右投递。",
-      "url": "https://talent.baidu.com/jobs/detail/GRADUATE/a20dfb76-4c9d-4814-bd74-7561616e2773"
+      "requirements": [
+        "可投递 1 个职位",
+        "与常规校招不冲突"
+      ],
+      "note": "不影响秋招，建议 2026-07-30 前尽早投递（管培生）。与 2027 常规校招不冲突，可同时投递。",
+      "url": "https://talent.baidu.com/jobs/trend#trend-anchor-recruit_qa"
     },
     {
       "company": "拼多多集团",
@@ -83,21 +87,233 @@
       "requirements": [
         "每人每次 1 个职位",
         "流程结束（共享中）后可重新投递",
-        "不限投递次数"
+        "不限投递次数",
+        "与管培生不冲突"
       ],
-      "note": "7月9日开始，不限截止时间。有笔试，建议于 2026-07-23 ~ 07-25 投递，先准备笔试。",
+      "note": "7/9 开始，2027-06 招满即止。笔试 7月中旬—10月下旬；Offer 预计 10月底—11月初。建议 8/1 之后投递（挂牌生之后）。与管培生不冲突。",
       "url": "https://talent.baidu.com/jobs/list"
     },
     {
-      "company": "网易游戏",
+      "company": "网易互娱",
       "position": "2027 校园招聘",
       "status": "open",
       "location": "",
       "startDate": "2026-07-21",
-      "deadline": "尽早投递",
+      "deadline": "尽早投递（招满即止）",
+      "requirements": [
+        "网申 7/21 起招满即止",
+        "面试约 2-4 轮",
+        "与雷火/互联网独立招聘互不冲突"
+      ],
+      "note": "非重点企业，7/30 前投第一志愿。部分岗位有笔试；Offer 分校招正式/实习（可转正）两种。与网易雷火、网易互联网（云音乐/严选/有道等）独立招聘互不冲突，可同时投。",
+      "url": "https://campus.game.163.com/app/job/position?id=102"
+    },
+    {
+      "company": "科大讯飞",
+      "position": "2027 正式秋招",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "建议 7/30 前投第一志愿",
+      "requirements": [
+        "每人最多投递 2 个岗位",
+        "岗位投递后无法修改",
+        "校招期间岗位持续上新"
+      ],
+      "note": "非目标企业，但需在笔试前投递。流程：简历初筛→测评（邮件+短信通知，须按时完成）→笔试（8/2 起每周一场）→面试（8 月起线上）。建议 7/30 前完成第一志愿，第一志愿流程结束后再投第二志愿。",
+      "url": "https://iflytek.zhiye.com/campus/jobs"
+    },
+    {
+      "company": "影石 Insta360",
+      "position": "2027 届秋招",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "建议 8/1 之后投递（窗口即日~10月）",
+      "requirements": [
+        "建议按 1 个岗位重点准备"
+      ],
+      "note": "重点考察企业。投递窗口即日~10 月持续开放；笔试 8 月~11 月分批；Offer 预计 10 月左右起。建议 8/1 之后再投递，质量优先；研究产品线/技术方向/企业文化。",
+      "url": "https://arashivision.jobs.feishu.cn/campus"
+    },
+    {
+      "company": "合合信息",
+      "position": "2025 秋招",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-27",
+      "deadline": "2026-10-31",
+      "requirements": [
+        "按 1 个志愿准备（传闻 3 个）"
+      ],
+      "note": "一般企业，关联度不高，优先级较低。网申 7/27—10/31；面试 8 月上旬起；意向沟通 8 月下旬起；Offer 10 月起。建议 8/1 之后投递。",
+      "url": "https://intsig.zhiye.com/campus/jobs"
+    },
+    {
+      "company": "网易游戏雷火",
+      "position": "27 届秋招",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-08-11",
+      "deadline": "2026-10-15（网申截止）",
+      "requirements": [
+        "按 1 个岗位准备",
+        "内推=直接点击对应链接（非内推码）"
+      ],
+      "note": "重点目标企业。网申截止 10/15，招满即止；职位 8/11 正式开启（数量多需等待）。内推直接点击表格内对应链接，不是填内推码。",
+      "url": "https://leihuo.163.com/campus/#/full?channel=DUbMIjn"
+    },
+    {
+      "company": "搜狐畅游",
+      "position": "2027 提前批",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-27",
+      "deadline": "2026-08-10（提前批）",
+      "requirements": [
+        "先投 1 个提前批"
+      ],
+      "note": "前期不重点考察。提前批 7/27—8/10，免测试快人一步拿 offer；正式批 8/11 开启全量岗位。宣讲会 8/5、8/18、8/19、8/20 小红书直播。建议 7/30 投 1 个提前批，8/11 后关注正式批。",
+      "url": "https://app.mokahr.com/campus-recruitment/cyou-inc/42233#/jobs?zhineng%5B0%5D=76134"
+    },
+    {
+      "company": "搜狐畅游",
+      "position": "2027 正式批",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-08-11",
+      "deadline": "招满即止（全量岗位）",
       "requirements": [],
-      "note": "7月21日开始，尽早投递，建议于 2026-07-28 左右投递。",
-      "url": "https://campus.game.163.com/?referralCode=oKFLGH"
+      "note": "正式批 8/11 开启全量岗位放送；与提前批相互独立。前期未重点考察，若提前批有结果或正式批时可再考察（未发现双休）。",
+      "url": "https://app.mokahr.com/campus-recruitment/cyou-inc/42233#/jobs?zhineng%5B0%5D=76134"
+    },
+    {
+      "company": "莉莉丝游戏",
+      "position": "2027 提前批",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "2026-08-07（提前批网申）",
+      "requirements": [
+        "单次最多投 2 个岗位",
+        "提前批不占用正式校招机会（复活甲+1）"
+      ],
+      "note": "提前批越快越好，7/30 前投。提前批不占用正式校招机会；先于正式批启动，早投早 Offer。后续持续关注正式批。",
+      "url": "https://lilithgames.jobs.feishu.cn/campus/"
+    },
+    {
+      "company": "莉莉丝游戏",
+      "position": "2027 正式批",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "待定",
+      "requirements": [],
+      "note": "正式批时间待定，持续关注。提前批（截止 8/7）不占用正式机会。",
+      "url": "https://lilithgames.jobs.feishu.cn/campus/"
+    },
+    {
+      "company": "宇通集团",
+      "position": "提前批",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "截止日已过但仍可投（名额紧张）",
+      "requirements": [
+        "仅能投递 1 个岗位",
+        "选管培生"
+      ],
+      "note": "当作尝试，不抱太高期望。提前批截止日已过但系统仍接受，尽快提交；在管培生/普通中选管培生。建议 7/30 前投递。",
+      "url": "https://wecruit.hotjob.cn/SU64e7157a1eb80519a8e4efcf/mc/index"
+    },
+    {
+      "company": "韶音科技",
+      "position": "提前批",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "建议 7/30 前（提前批）",
+      "requirements": [
+        "最多投 2 个岗位（第一志愿注明第二志愿）",
+        "提前批与正式批相互独立互不影响"
+      ],
+      "note": "重点考察企业。提前批与正式批流程相互独立；第一志愿未过筛可能调至第二志愿。建议在把握/希望/理想间权衡选岗，7/30 前投提前批。",
+      "url": "https://app.mokahr.com/campus-recruitment/aftershokzhr/36940#/jobs?commitment=%E5%85%A8%E8%81%8C&zhineng%5B0%5D=71580"
+    },
+    {
+      "company": "微步在线",
+      "position": "秋招",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "建议本月 30 号前投递",
+      "requirements": [
+        "先按 1 个岗位准备"
+      ],
+      "note": "本月 30 号前完成投递。网申已开启；笔试 8 月起（时间未公布）。优先冲刺最优岗，有余力再加竞争较小岗位备选。",
+      "url": "https://app.mokahr.com/campus-recruitment/threatbook/39679?locale=zh-CN#/jobs?commitment%5B0%5D=%E5%85%A8%E8%81%8C&page=1&anchorName=jobsList"
+    },
+    {
+      "company": "海尔",
+      "position": "2027 提前批",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "建议 7/30 前（截止未公布）",
+      "requirements": [
+        "最感兴趣 1 个岗位"
+      ],
+      "note": "未看到截止日期与岗位数量限制。建议选最感兴趣岗位，7/30 前完成投递。",
+      "url": "https://maker.haier.net/client/campusmobile/customizedjobs/type/top.html?inviter_code=UDFMb2ZaK3F3Mjg9"
+    },
+    {
+      "company": "深圳方正微电子",
+      "position": "2027 届校招",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "建议 8/1 之后投递（截止未说明）",
+      "requirements": [
+        "每人最多投 2 个岗位",
+        "HR 按投递先后顺序处理简历"
+      ],
+      "note": "疑似国企。网申已开启无截止说明；HR 按岗位投递先后顺序处理简历（先投先处理）。建议 8/1 之后投 1 个岗位。",
+      "url": "https://founderic.zhiye.com/campus"
+    },
+    {
+      "company": "京东",
+      "position": "2026 校招-新星计划 JDSTAR",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-07-21",
+      "deadline": "2026-10-30（网申/内推）",
+      "requirements": [
+        "1 个意向职位 + 1 个调剂职位"
+      ],
+      "note": "重点企业。网申/内推 7/21—10/30；在线测评 7/22—10/31（筛选通过 1 天内收到）；面试 8/11 起。建议 8/1 之后重点了解，关注后续是否还有其他秋招项目。",
+      "url": "https://campus.jd.com/#/jobs"
+    },
+    {
+      "company": "北京聚宽",
+      "position": "待定（先了解）",
+      "status": "open",
+      "location": "",
+      "startDate": "",
+      "deadline": "待定",
+      "requirements": [],
+      "note": "先了解公司背景、业务方向、开放岗位（信息待补充）。",
+      "url": ""
+    },
+    {
+      "company": "迅雷",
+      "position": "27 届校招",
+      "status": "open",
+      "location": "",
+      "startDate": "2026-08-01",
+      "deadline": "8 月投递（招满即止）",
+      "requirements": [],
+      "note": "8 月投递 → 9-11 月笔试 → 10 月起 Offer。建议 8/1 之后考虑投递。",
+      "url": "https://app.mokahr.com/campus_apply/xunlei/26600?recommendCode=DSZAne8X#/"
     }
   ]
 }
