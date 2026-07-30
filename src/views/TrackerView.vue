@@ -93,6 +93,10 @@
             </button></EditOnly>
           </div>
 
+          <div class="app-links" v-if="app.links && app.links.job">
+            <a :href="app.links.job" target="_blank" rel="noopener" class="btn btn--primary btn-sm">🔗 投递记录页</a>
+          </div>
+
           <div class="app-timeline">
             <div v-for="(sh, si) in (app.statusHistory || [])" :key="si" class="app-timeline-item">
               <span class="status-pill" :style="getStatusStyle(sh.status)">
@@ -703,6 +707,9 @@ function toggleInsightKey(iv, catLabel, iInGroup) {
   color: var(--text-light);
   margin-bottom: 12px;
   align-items: center;
+}
+.app-links {
+  margin-bottom: 12px;
 }
 .priority-toggle {
   background: none;
