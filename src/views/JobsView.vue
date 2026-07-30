@@ -52,6 +52,24 @@
           </div>
         </div>
 
+        <!-- 投递日期高亮徽章（按紧急度配色） -->
+        <div v-if="company.applyDate" class="apply-date-row" :class="`apply-date--${applyUrgency(company.applyDate)}`">
+          <span class="apply-date-label">🎯 我的投递日</span>
+          <ClickEdit :value="company.applyDate" module="jobs" :path="`companies.${realIdx(company)}.applyDate`" placeholder="投递日期">
+            <template #display>
+              <span class="apply-date-value">{{ company.applyDate }}</span>
+            </template>
+          </ClickEdit>
+        </div>
+        <EditOnly v-else>
+          <div class="apply-date-row apply-date--none">
+            <span class="apply-date-label">🎯 我的投递日</span>
+            <ClickEdit :value="company.applyDate" module="jobs" :path="`companies.${realIdx(company)}.applyDate`" placeholder="点击设置投递日期">
+              <template #display><span class="apply-date-value">未设置</span></template>
+            </ClickEdit>
+          </div>
+        </EditOnly>
+
         <div class="job-meta">
           <span>📍 <ClickEdit :value="company.location" module="jobs" :path="`companies.${realIdx(company)}.location`" placeholder="地点" /></span>
           <span>🗓 <ClickEdit :value="company.startDate" module="jobs" :path="`companies.${realIdx(company)}.startDate`" placeholder="开始日期" /></span>
@@ -135,6 +153,20 @@ function realIdx(company) {
   return companies.value.findIndex(c => c.id && c.id === company.id)
 }
 
+// 投递日期紧急度：urgent(今天及之前/红) | soon(一周内/橙) | later(更晚/蓝) | none(待定或空/灰)
+function applyUrgency(applyDate) {
+  if (!applyDate || /待定|待补|未设置/.test(applyDate)) return 'none'
+  const m = String(applyDate).match(/(\d{1,2})\/(\d{1,2})/)
+  if (!m) return 'none'
+  const now = new Date()
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const d = new Date(now.getFullYear(), +m[1] - 1, +m[2])
+  const diffDays = Math.round((d - today) / 86400000)
+  if (diffDays <= 0) return 'urgent'
+  if (diffDays <= 7) return 'soon'
+  return 'later'
+}
+
 function addCompany() {
   const id = 'job_' + Date.now().toString(36)
   arrayOp('jobs', 'companies', 'push', {
@@ -144,6 +176,7 @@ function addCompany() {
     location: '',
     startDate: '',
     deadline: '',
+    applyDate: '',
     requirements: [],
     url: '',
     status: 'open',
@@ -300,6 +333,38 @@ function removeReq(company, ri) {
 .job-status--applied { background: var(--primary-light, #e0e7ff); color: var(--primary); }
 .job-status--soon { background: var(--warning-light, #fef3c7); color: var(--warning); }
 .job-status--closed { background: var(--border-light); color: var(--text-light); }
+
+/* 投递日期高亮徽章 */
+.apply-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 6px;
+  padding: 9px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.apply-date-label {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: .8;
+  white-space: nowrap;
+}
+.apply-date-value {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.apply-date--urgent { background: #ffe3e3; color: #d12b2b; border-color: #ffb0b0; }
+.apply-date--soon   { background: #fff1dd; color: #c2650a; border-color: #ffd7a3; }
+.apply-date--later  { background: #e6efff; color: #2563eb; border-color: #bcd2ff; }
+.apply-date--none   { background: var(--bg-alt, #f3f4f6); color: var(--text-light, #9ca3af); }
+.apply-date--urgent .apply-date-value { animation: pulse-urgent 1.6s ease-in-out infinite; }
+@keyframes pulse-urgent {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .55; }
+}
 
 .job-meta {
   display: flex;
