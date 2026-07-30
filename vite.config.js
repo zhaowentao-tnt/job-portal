@@ -48,6 +48,11 @@ function saveDataPlugin() {
 export default defineConfig({
   plugins: [vue(), saveDataPlugin()],
   base: '/job-portal/',
+  build: {
+    // 不让 Vite 清空 dist：dist 内含 gh-pages 的 .git，且本机 rmSync 被安全删除垫片劫持会崩溃。
+    // 旧产物由部署脚本/手动清理，构建只覆盖/新增文件。
+    emptyOutDir: false
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
