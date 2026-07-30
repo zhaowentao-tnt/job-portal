@@ -1,7 +1,11 @@
 import { ref } from 'vue'
+import { useGitHubSync } from './useGitHubSync'
 
 // 8个数据模块
 const MODULES = ['profile', 'experiences', 'portfolio', 'growth', 'life', 'applications', 'jobs', 'interviews']
+
+// GitHub 同步
+const { debouncedSync } = useGitHubSync()
 
 // 单例数据 - 所有组件共享
 const data = ref({})
@@ -54,7 +58,7 @@ async function loadAll() {
   loaded.value = true
 }
 
-// 保存单个模块：写 localStorage + 更新响应式 + 尝试远程写 JSON（dev）
+// 保存单个模块：写 localStorage + 更新响应式 + dev写JSON + GitHub同步
 function saveModule(name, newData) {
   localStorage.setItem(LS_PREFIX + name, JSON.stringify(newData))
   data.value = { ...data.value, [name]: newData }
@@ -66,6 +70,8 @@ function saveModule(name, newData) {
       body: JSON.stringify(newData)
     }).catch(() => {})
   } catch (_) { /* ignore */ }
+  // GitHub 自动同步（防抖2秒，Token 未配置时自动跳过）
+  debouncedSync(name, newData)
 }
 
 // 重置单个模块（清除 localStorage，重新从 JSON 加载）
