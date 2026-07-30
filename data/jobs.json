@@ -33,7 +33,7 @@
     {
       "company": "中兴",
       "position": "未来领军招聘",
-      "status": "closed",
+      "status": "open",
       "applyDate": "",
       "location": "",
       "startDate": "",
@@ -47,15 +47,15 @@
       "position": "2027 管理培训生计划",
       "status": "applied",
       "applyDate": "7/30 前",
-      "location": "",
+      "location": "北京",
       "startDate": "2026-07-03",
       "deadline": "2026-08-14",
       "requirements": [
         "可投递 1 个职位",
         "与常规校招不冲突"
       ],
-      "note": "不影响秋招，建议 2026-07-30 前尽早投递（管培生）。与 2027 常规校招不冲突，可同时投递。",
-      "url": "https://talent.baidu.com/jobs/trend#trend-anchor-recruit_qa"
+      "note": "不影响秋招，建议 2026-07-30 前尽早投递（管培生）。与 2027 常规校招不冲突，可同时投递。已投递（2026-07-30）：志愿3个——运营、财务、战略（北京）。",
+      "url": "https://talent.baidu.com/jobs/center"
     },
     {
       "company": "拼多多集团",
@@ -105,7 +105,7 @@
       "position": "2027 校园招聘",
       "status": "applied",
       "applyDate": "7/30 前",
-      "location": "",
+      "location": "杭州、广州",
       "startDate": "2026-07-21",
       "deadline": "尽早投递（招满即止）",
       "requirements": [
@@ -113,15 +113,15 @@
         "面试约 2-4 轮",
         "与雷火/互联网独立招聘互不冲突"
       ],
-      "note": "非重点企业，7/30 前投第一志愿。部分岗位有笔试；Offer 分校招正式/实习（可转正）两种。与网易雷火、网易互联网（云音乐/严选/有道等）独立招聘互不冲突，可同时投。",
-      "url": "https://campus.game.163.com/app/job/position?id=102"
+      "note": "非重点企业，7/30 前投第一志愿。部分岗位有笔试；Offer 分校招正式/实习（可转正）两种。与网易雷火、网易互联网（云音乐/严选/有道等）独立招聘互不冲突，可同时投。已投递（2026-07-30）：游戏发行运营（杭州/广州），未来可再进行第二志愿。",
+      "url": "https://campus.game.163.com/app/personal/apply"
     },
     {
       "company": "科大讯飞",
       "position": "2027 正式秋招",
       "status": "applied",
       "applyDate": "7/30 前",
-      "location": "",
+      "location": "合肥",
       "startDate": "",
       "deadline": "建议 7/30 前投第一志愿",
       "requirements": [
@@ -129,8 +129,8 @@
         "岗位投递后无法修改",
         "校招期间岗位持续上新"
       ],
-      "note": "非目标企业，但需在笔试前投递。流程：简历初筛→测评（邮件+短信通知，须按时完成）→笔试（8/2 起每周一场）→面试（8 月起线上）。建议 7/30 前完成第一志愿，第一志愿流程结束后再投第二志愿。",
-      "url": "https://iflytek.zhiye.com/campus/jobs"
+      "note": "非目标企业，但需在笔试前投递。流程：简历初筛→测评（邮件+短信通知，须按时完成）→笔试（8/2 起每周一场）→面试（8 月起线上）。建议 7/30 前完成第一志愿，第一志愿流程结束后再投第二志愿。已投递（2026-07-30）：运营管理师（合肥），可进行第二志愿（运营管理师），需及时处理。",
+      "url": "https://iflytek.zhiye.com/personal/deliveryRecord"
     },
     {
       "company": "影石 Insta360",
@@ -180,14 +180,14 @@
       "position": "2027 提前批",
       "status": "applied",
       "applyDate": "7/30",
-      "location": "",
+      "location": "北京",
       "startDate": "2026-07-27",
       "deadline": "2026-08-10（提前批）",
       "requirements": [
         "先投 1 个提前批"
       ],
-      "note": "前期不重点考察。提前批 7/27—8/10，免测试快人一步拿 offer；正式批 8/11 开启全量岗位。宣讲会 8/5、8/18、8/19、8/20 小红书直播。建议 7/30 投 1 个提前批，8/11 后关注正式批。",
-      "url": "https://app.mokahr.com/campus-recruitment/cyou-inc/42233#/jobs?zhineng%5B0%5D=76134"
+      "note": "前期不重点考察。提前批 7/27—8/10，免测试快人一步拿 offer；正式批 8/11 开启全量岗位。宣讲会 8/5、8/18、8/19、8/20 小红书直播。建议 7/30 投 1 个提前批，8/11 后关注正式批。已投递（2026-07-30）：一志愿产品经理、二志愿财务管培生（北京）。",
+      "url": "https://app.mokahr.com/campus-recruitment/cyou-inc/42233#/candidateHome/applications"
     },
     {
       "company": "搜狐畅游",
@@ -204,17 +204,17 @@
     {
       "company": "莉莉丝游戏",
       "position": "2027 提前批",
-      "status": "open",
+      "status": "applied",
       "applyDate": "7/30 前",
-      "location": "",
+      "location": "上海",
       "startDate": "",
       "deadline": "2026-08-07（提前批网申）",
       "requirements": [
         "单次最多投 2 个岗位",
         "提前批不占用正式校招机会（复活甲+1）"
       ],
-      "note": "提前批越快越好，7/30 前投。提前批不占用正式校招机会；先于正式批启动，早投早 Offer。后续持续关注正式批。",
-      "url": "https://lilithgames.jobs.feishu.cn/campus/"
+      "note": "提前批越快越好，7/30 前投。提前批不占用正式校招机会；先于正式批启动，早投早 Offer。后续持续关注正式批。已投递（2026-07-30）：全球发行策略管培生、游戏平台运营（上海）。",
+      "url": "https://lilithgames.jobs.feishu.cn/campus/position/application"
     },
     {
       "company": "莉莉丝游戏",

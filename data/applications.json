@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-16",
+  "lastUpdated": "2026-07-30",
   "statusConfig": {
     "submitted": {
       "label": "已投递",
@@ -729,6 +729,116 @@
       ],
       "links": {},
       "note": "2027届校招提前批 · 一志愿运营管培生（上海）、二志愿市场管培生（上海） · 已笔试"
+    },
+    {
+      "id": "app_030",
+      "company": "百度",
+      "position": "2027 管理培训生计划",
+      "department": "志愿3个：运营-财务-战略",
+      "location": "北京",
+      "channel": "官网",
+      "applyDate": "2026-07-30",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-07-30",
+          "note": "已投递 · 志愿3个：运营、财务、战略（北京）"
+        }
+      ],
+      "links": {
+        "job": "https://talent.baidu.com/jobs/center"
+      },
+      "note": "2027 管理培训生计划 · 北京 · 志愿3个：运营-财务-战略 · 已投递"
+    },
+    {
+      "id": "app_031",
+      "company": "网易互娱",
+      "position": "2027 校园招聘（游戏发行运营）",
+      "department": "第一志愿：游戏发行运营；未来可再进行第二志愿",
+      "location": "杭州、广州",
+      "channel": "官网",
+      "applyDate": "2026-07-30",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-07-30",
+          "note": "已投递 · 游戏发行运营（杭州/广州），未来可再进行第二志愿"
+        }
+      ],
+      "links": {
+        "job": "https://campus.game.163.com/app/personal/apply"
+      },
+      "note": "2027 校园招聘 · 杭州/广州 · 游戏发行运营 · 已投递，未来可再进行第二志愿"
+    },
+    {
+      "id": "app_032",
+      "company": "科大讯飞",
+      "position": "2027 正式秋招（运营管理师）",
+      "department": "第一志愿：运营管理师；可进行第二志愿（运营管理师）",
+      "location": "合肥",
+      "channel": "官网",
+      "applyDate": "2026-07-30",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-07-30",
+          "note": "已投递 · 运营管理师（合肥），可进行第二志愿，需及时处理"
+        }
+      ],
+      "links": {
+        "job": "https://iflytek.zhiye.com/personal/deliveryRecord"
+      },
+      "note": "2027 正式秋招 · 合肥 · 运营管理师 · 已投递，可进行第二志愿，需及时处理"
+    },
+    {
+      "id": "app_033",
+      "company": "搜狐畅游",
+      "position": "2027 提前批（产品经理）",
+      "department": "一志愿：产品经理；二志愿：财务管培生",
+      "location": "北京",
+      "channel": "官网",
+      "applyDate": "2026-07-30",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-07-30",
+          "note": "已投递 · 一志愿产品经理、二志愿财务管培生（北京）"
+        }
+      ],
+      "links": {
+        "job": "https://app.mokahr.com/campus-recruitment/cyou-inc/42233#/candidateHome/applications"
+      },
+      "note": "2027 提前批 · 北京 · 一志愿产品经理、二志愿财务管培生 · 已投递"
+    },
+    {
+      "id": "app_034",
+      "company": "莉莉丝游戏",
+      "position": "2027 提前批（全球发行策略管培生）",
+      "department": "全球发行策略管培生、游戏平台运营",
+      "location": "上海",
+      "channel": "官网",
+      "applyDate": "2026-07-30",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-07-30",
+          "note": "已投递 · 全球发行策略管培生、游戏平台运营（上海）"
+        }
+      ],
+      "links": {
+        "job": "https://lilithgames.jobs.feishu.cn/campus/position/application"
+      },
+      "note": "2027 提前批 · 上海 · 全球发行策略管培生、游戏平台运营 · 已投递"
     }
   ]
 }
