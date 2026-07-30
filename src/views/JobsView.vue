@@ -129,7 +129,10 @@ const statusOptions = [
 ]
 
 function realIdx(company) {
-  return companies.value.findIndex(c => c.id === company.id)
+  // 数据可能没有 id，用对象引用查找更可靠
+  const idx = companies.value.indexOf(company)
+  if (idx >= 0) return idx
+  return companies.value.findIndex(c => c.id && c.id === company.id)
 }
 
 function addCompany() {
