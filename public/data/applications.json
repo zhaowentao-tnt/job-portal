@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-30",
+  "lastUpdated": "2026-07-31",
   "statusConfig": {
     "submitted": {
       "label": "已投递",
@@ -839,6 +839,50 @@
         "job": "https://lilithgames.jobs.feishu.cn/campus/position/application"
       },
       "note": "2027 提前批 · 上海 · 全球发行策略管培生、游戏平台运营 · 已投递"
+    },
+    {
+      "id": "app_035",
+      "company": "韶音科技",
+      "position": "战略级管培生（提前批）",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-07-31",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-07-31",
+          "note": "已投递 · 战略级管培生（提前批）"
+        }
+      ],
+      "links": {
+        "job": "https://app.mokahr.com/campus-recruitment/aftershokzhr/36940#/candidateHome/applications"
+      },
+      "note": "战略级管培生（提前批） · 已投递"
+    },
+    {
+      "id": "app_036",
+      "company": "微步在线",
+      "position": "产品运营（秋招）",
+      "department": "",
+      "location": "",
+      "channel": "官网",
+      "applyDate": "2026-07-31",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-07-31",
+          "note": "已投递 · 产品运营（秋招）"
+        }
+      ],
+      "links": {
+        "job": "https://app.mokahr.com/campus-recruitment/threatbook/39679?locale=zh-CN#/candidateHome/applications"
+      },
+      "note": "产品运营（秋招） · 已投递"
     }
   ]
 }
