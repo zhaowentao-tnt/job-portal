@@ -67,7 +67,8 @@ async function getFileSha(path, branch) {
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: 'application/vnd.github+json'
-    }
+    },
+    cache: 'no-store'
   })
   if (res.ok) {
     const data = await res.json()
@@ -78,7 +79,8 @@ async function getFileSha(path, branch) {
 }
 
 // Update a single file on a branch
-async function updateFile(path, content, branch, message) {
+// 遇到 409 (版本号过期) 自动重取最新 SHA 重试，最多 3 次 —— 自愈式规避陈旧缓存导致的冲突
+async function updateFile(path, content, branch, message, attempt = 0) {
   const token = getToken()
   const sha = await getFileSha(path, branch)
 
@@ -101,6 +103,11 @@ async function updateFile(path, content, branch, message) {
 
   if (!res.ok) {
     const errData = await res.json().catch(() => ({}))
+    // 409 = 版本号过期（多为浏览器缓存了旧 SHA 或服务器刚被更新）
+    // 重新拉取最新 SHA 后重试即可自愈，无需用户手动清缓存
+    if (res.status === 409 && attempt < 2) {
+      return updateFile(path, content, branch, message, attempt + 1)
+    }
     throw new Error(`${res.status}: ${errData.message || '未知错误'}`)
   }
 
