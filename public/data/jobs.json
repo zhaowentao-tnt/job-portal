@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-31",
+  "lastUpdated": "2026-08-03",
   "companies": [
     {
       "company": "小鹏汽车",
@@ -338,6 +338,68 @@
       "requirements": [],
       "note": "8 月投递 → 9-11 月笔试 → 10 月起 Offer。建议 8/1 之后考虑投递。",
       "url": "https://app.mokahr.com/campus_apply/xunlei/26600?recommendCode=DSZAne8X#/"
+    },
+    {
+      "company": "京东",
+      "position": "2027 校园招聘-秋招正式批",
+      "status": "open",
+      "applyDate": "8/10 左右",
+      "location": "",
+      "startDate": "2026-08-03",
+      "deadline": "2026-11-30（网申截止）",
+      "requirements": [
+        "可以晚一点、慎重选择岗位",
+        "秋招正式批与 JDSTAR 为不同项目（可同时关注）"
+      ],
+      "note": "秋招正式批。网申 8/3—11/30；在线测评 8/3 起，简历通过后 1 天内通知；部分岗位需完成 AI 面试或在线笔试；面试 8 月中旬—12 月，远程/线下；录用函审批通过后随时发放。建议 8/10 左右投递，慎重选择志愿。",
+      "url": "https://campus.jd.com/#/jobs?selProjects=56&channelId=2536"
+    },
+    {
+      "company": "米哈游",
+      "position": "2027 秋招-正式批",
+      "status": "open",
+      "applyDate": "8/10 左右",
+      "location": "",
+      "startDate": "2026-08-03",
+      "deadline": "2026-10-31（正式批网申）",
+      "requirements": [
+        "每人只能投递 1 次，且仅能投递一个职位",
+        "技术提前批与正式批共享投递次数",
+        "已投递提前批的同学将无法再次投递正式批"
+      ],
+      "note": "正式批 8/3—10/31。每人只能投递 1 次，且仅能投递一个职位；技术提前批与正式批共享投递次数，已投递提前批的将无法再次投递正式批。建议 8/10 左右投递。",
+      "url": "https://jobs.mihoyo.com/?recommendationCode=UY7K&isRecommendation=true#/campus/qa"
+    },
+    {
+      "company": "帆软",
+      "position": "2027 届秋季校招-提前批",
+      "status": "open",
+      "applyDate": "8/10 左右",
+      "location": "",
+      "startDate": "2026-08-01",
+      "deadline": "2026-08-31（提前批网申）",
+      "requirements": [
+        "提前批不影响秋招正式批再投递",
+        "提前批网申 8/1—8/31"
+      ],
+      "note": "提前批不影响秋招正式批再投递。提前批网申 8/1—8/31，建议 8/10 左右投递。",
+      "url": "https://t6ixa9nyl6.jiandaoyun.com/f/65e1a1308ce7672fded0f0cf?ext=BLGLY"
+    },
+    {
+      "company": "bilibili",
+      "position": "2027 秋招-正式批",
+      "status": "open",
+      "applyDate": "8/7 左右",
+      "location": "",
+      "startDate": "2026-08-03",
+      "deadline": "招满即止（正式批）",
+      "requirements": [
+        "每位同学最多可投递 2 个志愿",
+        "系统按岗位投递先后顺序认定一、二志愿",
+        "优先处理第一志愿；一志愿流程终止或长期无评审进展，简历自动流转至二志愿"
+      ],
+      "note": "正式批。每位同学最多可投递 2 个志愿，系统按岗位投递先后顺序认定一、二志愿；优先处理第一志愿，若一志愿流程终止或长期无评审进展，简历自动流转至二志愿。建议结合个人意愿与岗位适配度合理规划志愿顺序，8/7 左右投递。网申/内推即日起；笔试 8 月中旬起；面试 8 月中旬起；意向书 9 月起。",
+      "url": ""
     }
   ]
 }
