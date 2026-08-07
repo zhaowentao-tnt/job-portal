@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-31",
+  "lastUpdated": "2026-08-07",
   "statusConfig": {
     "submitted": {
       "label": "已投递",
@@ -883,6 +883,50 @@
         "job": "https://app.mokahr.com/campus-recruitment/threatbook/39679?locale=zh-CN#/candidateHome/applications"
       },
       "note": "产品运营（秋招） · 已投递"
+    },
+    {
+      "id": "app_037",
+      "company": "小鹏汽车",
+      "position": "商业运营培训生",
+      "department": "",
+      "location": "",
+      "channel": "官网（飞书）",
+      "applyDate": "2026-08-07",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-08-07",
+          "note": "已投递 · 商业运营培训生（探索者计划秋招正式批）"
+        }
+      ],
+      "links": {
+        "job": "https://xiaopeng.jobs.feishu.cn/398875/position/application"
+      },
+      "note": "商业运营培训生（探索者计划秋招正式批） · 已投递"
+    },
+    {
+      "id": "app_038",
+      "company": "小鹏汽车",
+      "position": "战略规划AI训练生",
+      "department": "",
+      "location": "",
+      "channel": "官网（飞书）",
+      "applyDate": "2026-08-07",
+      "currentStatus": "submitted",
+      "priority": "high",
+      "statusHistory": [
+        {
+          "status": "submitted",
+          "date": "2026-08-07",
+          "note": "已投递 · 战略规划AI训练生（探索者计划秋招正式批）"
+        }
+      ],
+      "links": {
+        "job": "https://xiaopeng.jobs.feishu.cn/398875/position/application"
+      },
+      "note": "战略规划AI训练生（探索者计划秋招正式批） · 已投递"
     }
   ]
 }
