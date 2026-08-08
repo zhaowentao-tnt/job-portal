@@ -796,7 +796,8 @@
       "links": {
         "job": "https://iflytek.zhiye.com/personal/deliveryRecord"
       },
-      "note": "2027 正式秋招 · 合肥 · 运营管理师 · 已投递，可进行第二志愿，需及时处理"
+      "note": "2027 正式秋招 · 合肥 · 运营管理师 · 已投递，可进行第二志愿，需及时处理",
+      "pinned": true
     },
     {
       "id": "app_033",
