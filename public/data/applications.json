@@ -631,7 +631,8 @@
       "links": {
         "job": "https://zhaopin.greeyun.com/mine"
       },
-      "note": "珠海市 · 职位编号 G001khqo · 处理中（已申请）。官网投递进度：https://zhaopin.greeyun.com/mine"
+      "note": "珠海市 · 职位编号 G001khqo · 处理中（已申请）。官网投递进度：https://zhaopin.greeyun.com/mine",
+      "pinned": true
     },
     {
       "id": "app_026",
@@ -728,7 +729,8 @@
         }
       ],
       "links": {},
-      "note": "2027届校招提前批 · 一志愿运营管培生（上海）、二志愿市场管培生（上海） · 已笔试"
+      "note": "2027届校招提前批 · 一志愿运营管培生（上海）、二志愿市场管培生（上海） · 已笔试",
+      "pinned": true
     },
     {
       "id": "app_030",
